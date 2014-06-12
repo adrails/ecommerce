@@ -9,6 +9,17 @@ ECommerce::Application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 	config.action_mailer.default_url_options = { host: 'localhost:3000' }
+	config.action_mailer.delivery_method = :smtp
+	config.action_mailer.smtp_settings = {
+	  enable_starttls_auto: true,
+	  address:'smtp.gmail.com',
+	  port: 465,
+	  tls: true,
+	  domain:'google.com', #you can also use google.com
+	  authentication: 'plain',
+	  user_name: "adrails123@gmail.com",
+	  password: "admin@123rails"
+	}
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false

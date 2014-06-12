@@ -3,7 +3,18 @@ ECommerce::Application.configure do
 
   # Code is not reloaded between requests.
   config.cache_classes = true
-
+	config.action_mailer.default_url_options = { host: "smartek-e-commerce.herokuapp.com" }
+	  config.action_mailer.delivery_method = :smtp
+	config.action_mailer.smtp_settings = {
+	  enable_starttls_auto: true,
+	  address:'smtp.gmail.com',
+	  port: 465,
+	  tls: true,
+	  domain:'google.com', #you can also use google.com
+	  authentication: 'plain',
+	  user_name: "adrails123@gmail.com",
+	  password: "admin@123rails"
+	}
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both thread web servers
   # and those relying on copy on write to perform better.
@@ -20,14 +31,14 @@ ECommerce::Application.configure do
   # config.action_dispatch.rack_cache = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this).
-  config.serve_static_assets = false
+  config.serve_static_assets = true
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  config.assets.compile = true
 
   # Generate digests for assets URLs.
   config.assets.digest = true
