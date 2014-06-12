@@ -17,6 +17,9 @@ gem 'uglifier', '>= 1.3.0'
 gem 'heroku'
 gem 'pg'
 
+#Add the old functionality of attr_accessible again to rails 4.0
+gem 'protected_attributes'
+
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 
