@@ -17,7 +17,9 @@ class ApplicationController < ActionController::Base
 	def after_sign_in_path_for(user)
 		if user.role_type == "ADMIN"
 		 admins_path
-		else
+		elsif user.role_type == "RETAILER"
+		 retailers_path
+		else 
 		 customers_path
 		end
 	end
