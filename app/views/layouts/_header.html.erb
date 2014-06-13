@@ -13,8 +13,8 @@
 					<li><a href="#">Home</a></li>
 					<li><a href="#">About</a></li>
 					<li><a href="#">Contact</a></li>
+					<li><%= link_to "Profile", new_profile_detail_path%> </li>
 					<% if user_signed_in? %>
-						You are currently signed in as <%= current_user.email %>.
 						<li><%= link_to "Logout", destroy_user_session_path, :method=> :delete%></li>
 					<% else %>
 						<li><%= link_to "Sign up", new_user_registration_path %> </li>
@@ -32,8 +32,6 @@
 	<p>A comprehensive tutorial showing you how to quickly create responsive designs using Twitter Bootstrap 3.</p>
 	</div>
 	</div>
-
-
 
 	<!-- Include jQuery and bootstrap JS plugins -->
 	<script src="/assets/jquery-2.1.0.min.js"></script>
