@@ -15,6 +15,9 @@ class ProfileDetailsController < ApplicationController
   # GET /profile_details/new
   def new
     @profile_detail = ProfileDetail.new
+		3.times do
+			address = @profile_detail.addresses.build
+		end
   end
 
   # GET /profile_details/1/edit
