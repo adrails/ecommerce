@@ -1,4 +1,6 @@
 ECommerce::Application.routes.draw do
+  resources :profile_details
+
   devise_for :users
 	devise_scope :user do 
 		get "sign_in", :to => "devise/sessions#new" 

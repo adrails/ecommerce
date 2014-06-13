@@ -2,46 +2,64 @@
 <html>
 <head>
   <title>ECommerce</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-	<script src="assets/stylesheets/boot_css.css"></script>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+		<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+		<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	
+		<script src="/assets/boot_css.css"></script>
+		<script src="/assets/bootstrap.min.css"></script>
+
+		<link href="includes/style.css" rel="stylesheet">
+	    <!-- Include bootstrap CSS -->
+		<link href="/assets/bootstrap.min.css" rel="stylesheet">
+		<link href="/assets/style.css" rel="stylesheet">
   <%= csrf_meta_tags %>
-	<!--div id="piktowrapper-embed">
-		<div class="pikto-canvas-wrap">
-			<div class="pikto-canvas"></div>
+</head>
+	<%= render "layouts/header" %>
+		<!-- Middle content section -->
+	<div class="middle">
+		<div class="container">
+			<div class="col-md-9 content">
+				<%=yield %>
+			<div class="to-tutorial">
+			<p><strong>Visit the tutorial now to learn more:</strong></p>
+			<a href="http://www.revillweb.com/tutorials/bootstrap-tutorial/" class="btn btn-success">TO THE TUTORIAL</a>
+			</div>
+			</div>
+			<div class="col-md-3">
+			<h2>Resources</h2>
+				<ul class="nav nav-pills nav-stacked">
+					<li><a href="http://getbootstrap.com/" target="_blank">Download Twitter Bootstrap</a></li>
+					<li><a href="https://www.bootstrapresponsivethemes.com/" target="_blank">Bootstrap Responsive Themes</a></li>
+					<li><a href="http://amzn.to/1iO8NBg" target="_blank">UK: HTML & CSS: Design and Build Web Sites</a></li>
+					<li><a href="http://amzn.to/1lESKDp" target="_blank">UK: Bootstrap Site Blueprints</a></li>
+					<li><a href="http://amzn.to/1oXAbu6" target="_blank">US: HTML & CSS: Design and Build Web Sites</a></li>
+					<li><a href="http://amzn.to/1lESF2w" target="_blank">US: Bootstrap Site Blueprints</a></li>
+				</ul>
+			</div>
+			</div>
+			</div>
+
+			<!-- Site footer -->
+			<div class="bottom">
+			<div class="container">
+			<div class="col-md-4">
+			<h3><span class="glyphicon glyphicon-heart"></span> Footer section 1</h3>
+			<p>Content for the first footer section.</p>
+			</div>
+			<div class="col-md-4">
+			<h3><span class="glyphicon glyphicon-star"></span> Footer section 2</h3>
+			<p>Content for the second footer section.</p>
+			</div>
+			<div class="col-md-4">
+			<h3><span class="glyphicon glyphicon-music"></span> Footer section 3</h3>
+			<p>Content for the third footer section.</p>
+			</div>
 		</div>
 	</div>
-	<script>
-		(function(d){
-		var js, id="pikto-embed-js", ref=d.getElementsByTagName("script")[0];
-		if (d.getElementById(id)) {return;}
-		js=d.createElement("script"); js.id=id; js.async=true;
-		js.src="https://magic.piktochart.com/assets/embedding/embed.js?UID=2161039-e-commerce-overview";
-		ref.parentNode.insertBefore(js, ref);
-		}(document));
-	</script-->
-</head>
-<!--div class="container-fluid">
-  <div class="row-fluid">
-    <div class="span2">
-      <Sidebar content>
-    </div>
-    <div class="span10"-->
-		<body>
-		<% if user_signed_in? %>
-			You are currently signed in as <%= current_user.email %>.
-			<%= link_to "Logout", destroy_user_session_path, :method=> :delete%>
-		<% else %>
-			<%= link_to "Sign up!", new_user_registration_path %> or <%= link_to "Sign in", new_user_session_path%>
-		<% end %>
-		<p><%= notice %></p>
-		<p><%= alert %></p>
-		<%= yield %>
-		</body>
-    <!--/div>
-  </div>
-</div-->
+	<% if !user_signed_in? %>
+		<p class="notice_msg"><%= notice %></p>
+		<p class="alert_msg"><%= alert %></p>
+	<% end %>
 
-
+	<%= render "layouts/footer" %>
 </html>

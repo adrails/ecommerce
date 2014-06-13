@@ -7,11 +7,11 @@ class ApplicationController < ActionController::Base
 	rescue_from ActionController::RoutingError, :with => :rescue_404
 
   def not_found
-   redirect_to :controller=>'vendors', :action=>'index'
+   redirect_to root_path
   end
   
   def rescue_404
-     redirect_to :controller=>'vendors', :action=>'index'
+     redirect_to root_path
 	end
 	 
 	def after_sign_in_path_for(user)
