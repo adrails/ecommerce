@@ -18,6 +18,10 @@
 	<div class="middle">
 		<div class="container">
 			<div class="col-md-9 content">
+			<% if !user_signed_in? %>
+		<p class="notice_msg"><%= notice %></p>
+		<p class="alert_msg"><%= alert %></p>
+	<% end %>
 				<%=yield %>
 			<!--div class="to-tutorial">
 			<p><strong>Visit the tutorial now to learn more:</strong></p>
@@ -40,10 +44,7 @@
 
 			<!-- Site footer -->
 		
-	<% if !user_signed_in? %>
-		<p class="notice_msg"><%= notice %></p>
-		<p class="alert_msg"><%= alert %></p>
-	<% end %>
+	
 
 	<%= render "layouts/footer" %>
 </html>
