@@ -25,10 +25,10 @@ class AddressesController < ApplicationController
   # POST /addresses.json
   def create
     @address = Address.new(address_params)
-
+		@address.profile_detail_id = current_user.profile_detail.id
     respond_to do |format|
       if @address.save
-        format.html { redirect_to @address, notice: 'Address was successfully created.' }
+        format.html { redirect_to edit_profile_detail_path(@address.profile_detail_id), notice: 'Address was successfully created.' }
         format.json { render action: 'show', status: :created, location: @address }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class AddressesController < ApplicationController
   def update
     respond_to do |format|
       if @address.update(address_params)
-        format.html { redirect_to @address, notice: 'Address was successfully updated.' }
+        format.html { redirect_to edit_profile_detail_path(@address.profile_detail_id), notice: 'Address was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -54,9 +54,10 @@ class AddressesController < ApplicationController
   # DELETE /addresses/1
   # DELETE /addresses/1.json
   def destroy
+		@profile_id = @address.profile_detail_id
     @address.destroy
     respond_to do |format|
-      format.html { redirect_to addresses_url }
+      format.html { redirect_to edit_profile_detail_path(@profile_id) }
       format.json { head :no_content }
     end
   end

@@ -15,23 +15,26 @@ class ProfileDetailsController < ApplicationController
   # GET /profile_details/new
   def new
     @profile_detail = ProfileDetail.new
-		3.times do
-			address = @profile_detail.addresses.build
-		end
+		#~ 2.times do
+			#~ address = @profile_detail.addresses.build
+		#~ end
   end
 
   # GET /profile_details/1/edit
   def edit
+		#~ 2.times do
+			#~ address = @profile_detail.addresses.build
+		#~ end
   end
 
   # POST /profile_details
   # POST /profile_details.json
   def create
     @profile_detail = ProfileDetail.new(profile_detail_params)
-
+		@profile_detail.user_id = current_user.id
     respond_to do |format|
       if @profile_detail.save
-        format.html { redirect_to @profile_detail, notice: 'Profile detail was successfully created.' }
+        format.html { redirect_to edit_profile_detail_path(@profile_detail), notice: 'Profile detail was successfully created.' }
         format.json { render action: 'show', status: :created, location: @profile_detail }
       else
         format.html { render action: 'new' }

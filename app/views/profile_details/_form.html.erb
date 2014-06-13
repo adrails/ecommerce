@@ -17,11 +17,26 @@
       <%= f.text_field :dob, :class => 'text_field' %>
     </div>
   </div>
-      <% f.hidden_field :doj, :value => Time.now %>
-
+	<%= f.hidden_field :doj, :value => Time.now %>
+	<!--
+	<%= f.fields_for :addresses do |builder| %>
+		<%= render "address_fields", :f => builder %>
+	<% end %>-->
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                profile_details_path, :class => 'btn' %>
+    <!--%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                profile_details_path, :class => 'btn' %-->
   </div>
 <% end %>
+	<%if params[:action]=="edit"%>
+		<%if @profile_detail.addresses.present?%>
+			<%= render :partial => 'profile_addresses' %>
+		<% end %>
+	<% end %>
+<div class="form-actions">
+	<%if params[:action]=="edit"%>
+		<%=link_to "Add Address", new_address_path,:class=> "btn btn-primary", :style=>"color:white;"%>
+	<% end %>
+</div>
+	
+
