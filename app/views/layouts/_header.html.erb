@@ -13,8 +13,16 @@
 					<li><a href="#">Home</a></li>
 					<li><a href="#">About</a></li>
 					<li><a href="#">Contact</a></li>
-					<li><%= link_to "Profile", new_profile_detail_path%> </li>
+					<li><a href="/home/info_graphics">Ecommerce Overview</a></li>
+
 					<% if user_signed_in? %>
+						
+						<% if current_user.profile_detail.present? %>
+						<% @profile_id = ProfileDetail.find_by_user_id(current_user.id) %>
+							<li><%= link_to "Profile", edit_profile_detail_path(@profile_id)%> </li>
+						<%else%>
+							<li><%= link_to "Profile", new_profile_detail_path%> </li>
+						<%end%>
 						<li><%= link_to "Logout", destroy_user_session_path, :method=> :delete%></li>
 					<% else %>
 						<li><%= link_to "Sign up", new_user_registration_path %> </li>
@@ -26,8 +34,8 @@
 	</header>
 
 	<!-- Site banner -->
-	<div class="banner">
-	<div class="container">
+	<div class="banner" >
+	<div class="container" >
 	<h1>Twitter Bootstrap 3: Responsive Design Tutorial</h1>
 	<p>A comprehensive tutorial showing you how to quickly create responsive designs using Twitter Bootstrap 3.</p>
 	</div>

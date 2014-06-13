@@ -1,6 +1,5 @@
 ECommerce::Application.routes.draw do
   resources :profile_details
-
   devise_for :users
 	devise_scope :user do 
 		get "sign_in", :to => "devise/sessions#new" 
@@ -14,7 +13,7 @@ ECommerce::Application.routes.draw do
 	resources :customers
 	
 	# Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+  get 'home/info_graphics' => 'home#info_graphics'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
