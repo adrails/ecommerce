@@ -1,5 +1,4 @@
 ECommerce::Application.routes.draw do
-  resources :addresses
 
   resources :profile_details
   devise_for :users
