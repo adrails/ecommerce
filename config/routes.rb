@@ -1,4 +1,6 @@
 ECommerce::Application.routes.draw do
+  resources :addresses
+
   resources :profile_details
   devise_for :users
 	devise_scope :user do 
