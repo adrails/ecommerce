@@ -69,6 +69,9 @@ class AdminsController < ApplicationController
 		@user = User.find_by_id(params[:id])
 		if params[:approval] = "Yes"
 			@user.retailer_approval = true
+			@random_number = SecureRandom.hex(3)
+			@user.confirmation_token = @random_number
+			Notifier.retailer_req(@user, @random_number).deliver
 			@user.save
 			flash[:notice] = "Request Approved Successfully!!"
 		elsif params[:approval] = "No"

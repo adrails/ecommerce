@@ -1,5 +1,9 @@
 ECommerce::Application.routes.draw do
 
+  resources :product_brands
+
+  resources :product_categories
+
   resources :product_items
 
   resources :profile_details

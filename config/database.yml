@@ -7,7 +7,7 @@ development:
   adapter: mysql
   database: e_commerce_dev
   username: root
-  password: root
+  password: 
   pool: 5
   timeout: 5000
 
@@ -18,7 +18,7 @@ test:
   adapter: mysql
   database: e_commerce_test
   username: root
-  password: root
+  password: 
   pool: 5
   timeout: 5000
 

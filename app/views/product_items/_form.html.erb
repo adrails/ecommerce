@@ -14,7 +14,7 @@
   <div class="control-group">
     <%= f.label :description, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :description, :class => 'text_field' %>
+      <%= f.text_area :description, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
@@ -23,16 +23,10 @@
       <%= f.text_field :price, :class => 'text_field' %>
     </div>
   </div>
+ 
   <div class="control-group">
-    <%= f.label :user_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :user_id, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :is_active, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :is_active, :class => 'text_field' %>
+        <div class="controls">
+      <%= f.hidden_field :is_active, :value=>false %>
     </div>
   </div>
 

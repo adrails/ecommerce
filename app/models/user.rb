@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 	has_one :profile_detail
 	
 	def self.admin?(user)
-		if user.role_type = "ADMIN" && user.role_type != nil
+		if user.role_type == "ADMIN" && user.role_type != nil
 			return true
 		else
 			return false

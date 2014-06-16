@@ -25,7 +25,7 @@ class ProductItemsController < ApplicationController
   # POST /product_items.json
   def create
     @product_item = ProductItem.new(product_item_params)
-
+		@product_item.user_id = current_user.id
     respond_to do |format|
       if @product_item.save
         format.html { redirect_to @product_item, notice: 'Product item was successfully created.' }
