@@ -5,7 +5,15 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 				 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :name, :role_type
+  attr_accessible :email, :password, :password_confirmation, :name, :role_type,:retailer_approval,:desc
 	
 	has_one :profile_detail
+	
+	def self.admin?(user)
+		if user.role_type = "ADMIN" && user.role_type != nil
+			return true
+		else
+			return false
+		end
+	end
 end

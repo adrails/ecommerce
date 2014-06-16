@@ -14,7 +14,7 @@ class RetailersController < ApplicationController
 
   # GET /retailers/new
   def new
-    @retailer = Retailer.new
+    @user = User.new
   end
 
   # GET /retailers/1/edit

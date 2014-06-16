@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140616061242) do
+ActiveRecord::Schema.define(version: 20140616064731) do
 
   create_table "addresses", force: true do |t|
     t.string   "line_1"
@@ -41,8 +41,8 @@ ActiveRecord::Schema.define(version: 20140616061242) do
   create_table "profile_details", force: true do |t|
     t.string   "contact_no"
     t.string   "gender"
-    t.string   "dob"
-    t.string   "doj"
+    t.date     "dob"
+    t.date     "doj"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -71,6 +71,8 @@ ActiveRecord::Schema.define(version: 20140616061242) do
     t.string   "unconfirmed_email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "desc"
+    t.boolean  "retailer_approval"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

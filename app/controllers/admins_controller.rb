@@ -60,7 +60,23 @@ class AdminsController < ApplicationController
       format.json { head :no_content }
     end
   end
+	
+	def retailer_requests
+		@users = User.find_all_by_role_type_and_retailer_approval("RETAILER",false)
+	end
 
+	def approve_and_reject_retailer
+		@user = User.find_by_id(params[:id])
+		if params[:approval] = "Yes"
+			@user.retailer_approval = true
+			@user.save
+			flash[:notice] = "Request Approved Successfully!!"
+		elsif params[:approval] = "No"
+			flash[:notice] = "Request Rejected Successfully!!"
+		end
+		redirect_to retailer_requests_admins_path
+	end 
+	
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_admin

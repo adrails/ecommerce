@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.find_all_by_role_type(["CUSTOMER","RETAILER"])
   end
 
   # GET /users/1

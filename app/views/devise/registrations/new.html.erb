@@ -5,17 +5,32 @@
 	
 	<div><%= f.label :name %><br />
     <%= f.text_field :name %></div>
-		
-	<% f.hidden_field :role_type, value: "CUSTOMER" %>
 
   <div><%= f.label :email %><br />
   <%= f.email_field :email, autofocus: true %></div>
+	
+	<%if params[:retailer]%>
+		<%= f.hidden_field :role_type, value: "RETAILER" %>
+		<%= f.hidden_field :retailer_approval, value: false %>
+		<div><%= f.label :description %><br />
+    <%= f.text_area :desc %></div>
+		<div>Contact no<br>
+		<input type="text" name="retailer[contact_no]"></div>
+		<div>Gender	<br>
+		<input type="text" name="retailer[gender]"></div>
+		<% @password = (0..10).map { ('A'..'Z').to_a[rand(26)] }.join%>
+		<%=f.hidden_field :password, :value=>@password%>
+		<%=f.hidden_field :password_confirmation, :value=>@password%>
+	<% else %>
+		<%= f.hidden_field :role_type, value: "CUSTOMER" %>
+		<div><%= f.label :password %><br />
+			<%= f.password_field :password, autocomplete: "off" %></div>
 
-  <div><%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %></div>
+		<div><%= f.label :password_confirmation %><br />
+			<%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+	<% end %>
 
-  <div><%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+  
 
   <div><%= f.submit "Sign up" %></div>
 <% end %>

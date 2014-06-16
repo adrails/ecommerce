@@ -12,10 +12,18 @@ ECommerce::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-	resources :admins
+	resources :admins do
+		collection do
+			get 'retailer_requests'
+		end
+		member do
+			post 'approve_and_reject_retailer'
+		end
+	end
 	resources :customers
 	resources :addresses
 	resources :users
+	resources :retailers
 	# Example of regular route:
   get 'home/info_graphics' => 'home#info_graphics'
 
