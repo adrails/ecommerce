@@ -1,0 +1,19 @@
+<% @profile_detail.addresses.each do |address| %>
+<div style="background:#CCCCCC">
+	<div class="control-group">
+		<div class="controls">
+			<div style="text-align:right;width:160px">
+				<%= address.line_1 %><br>
+				<%= address.line_2 %><br>
+				<%= address.city %><br>
+				<%= address.state %><br>
+				<%= address.country %><br>
+				<%= address.pincode %><br>
+				<%= address.landmark %><br>
+				<%= link_to "Edit #{address.nick_name}"	,edit_address_path(address), :class => 'btn btn-mini' %>
+				<%= link_to t('.destroy', :default => t("helpers.links.destroy")),address_path(address),:method => :delete,:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },:class => 'btn btn-mini btn-danger' %><br>
+			</div>
+		</div>
+	</div>
+</div>
+<% end %>
