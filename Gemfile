@@ -16,7 +16,7 @@ gem "bson_ext"
 gem 'uglifier', '>= 1.3.0'
 gem 'heroku'
 gem 'pg'
-
+gem "paperclip", "~> 4.1"
 #Add the old functionality of attr_accessible again to rails 4.0
 gem 'protected_attributes'
 
