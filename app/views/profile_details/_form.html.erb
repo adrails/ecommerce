@@ -1,5 +1,17 @@
-<%= form_for @profile_detail, :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for @profile_detail, :html => { :class => 'form-horizontal', :multipart => true  } do |f| %>
   <div class="control-group">
+    <%= f.label :profile_picture, :class => 'control-label' %>
+    <div class="controls">
+		<%if @profile_detail.avatar.nil?%>
+			<%= f.file_field :avatar %>
+		<%else%>
+			<%= image_tag @profile_detail.avatar.url(:thumb) %>
+			<%= f.file_field :avatar %>
+		<%end%>
+    </div>
+  </div>
+	
+	<div class="control-group">
     <%= f.label :contact_no, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :contact_no, :class => 'text_field' %>
@@ -18,19 +30,14 @@
     </div>
   </div>
 
-<div class="control-group">
-    <%= f.label :avatar, :class => 'control-label' %>
-    <div class="controls">
-	<%= f.file_field :avatar %>
-    </div>
-  </div>
-
 	<%= f.hidden_field :doj, :value => Time.now %>
 	<!--
 	<%= f.fields_for :addresses do |builder| %>
 		<%= render "address_fields", :f => builder %>
 	<% end %>-->
 
+
+	
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <!--%= link_to t('.cancel', :default => t("helpers.links.cancel")),
