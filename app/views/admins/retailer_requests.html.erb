@@ -1,0 +1,42 @@
+<%- model_class = User -%>
+<div class="page-header">
+  <h1>Retailer Requests</h1>
+</div>
+<% if !@users.present? %>
+	Sorry!! No Requests Found
+<% else %>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th><%= model_class.human_attribute_name(:id) %></th>
+				<th><%= model_class.human_attribute_name(:name) %></th>
+				<th><%= model_class.human_attribute_name(:email) %></th>
+				<th><%= model_class.human_attribute_name(:role_type) %></th>
+				<th>Description</th>
+				<th>Confirmed</th>
+				<th><%=t '.actions', :default => t("helpers.actions") %></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @users && @users.each do |user| %>
+				<tr>
+					<td><%= link_to user.id, user_path(user) %></td>
+					<td><%= user.name %></td>
+					<td><%= user.email %></td>
+					<td><%= user.role_type %></td>
+					<td><%= user.desc %></td>
+					<td><%= user.confirmed_at %></td>
+					<td>
+					<%= button_to "Approve", approve_and_reject_retailer_admin_path(user,:approval=>"Yes"), data: { confirm: "Are you sure?" }, :class => 'btn btn-mini btn-danger' %>
+					<%= button_to "Reject", approve_and_reject_retailer_admin_path(user,:approval=>"No"), data: { confirm: "Are you sure?" }, :class => 'btn btn-mini btn-danger' %>
+
+						
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+	<!--%= link_to t('.new', :default => t("helpers.links.new")),new_user_path,:class => 'btn btn-primary' %-->
+<% end %>
+
+
