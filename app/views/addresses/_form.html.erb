@@ -42,12 +42,6 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :profile_detail_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :profile_detail_id, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
     <%= f.label :nick_name, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :nick_name, :class => 'text_field' %>
@@ -56,7 +50,8 @@
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                addresses_path, :class => 'btn' %>
+    <!--%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                addresses_path, :class => 'btn' %-->
+	<input action="action" type="button" value="Cancel" onclick="history.go(-1);" class ='btn btn-primary' />
   </div>
 <% end %>

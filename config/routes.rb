@@ -1,7 +1,6 @@
 ECommerce::Application.routes.draw do
-  resources :product_items
 
-  resources :addresses
+  resources :product_items
 
   resources :profile_details
   devise_for :users
@@ -15,7 +14,8 @@ ECommerce::Application.routes.draw do
   # You can have the root of your site routed with "root"
 	resources :admins
 	resources :customers
-	
+	resources :addresses
+	resources :users
 	# Example of regular route:
   get 'home/info_graphics' => 'home#info_graphics'
 

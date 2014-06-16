@@ -16,7 +16,7 @@
 					<li><a href="/home/info_graphics">Ecommerce Overview</a></li>
 
 					<% if user_signed_in? %>
-						
+
 						<% if current_user.profile_detail.present? %>
 						<% @profile_id = ProfileDetail.find_by_user_id(current_user.id) %>
 							<li><%= link_to "Profile", edit_profile_detail_path(@profile_id)%> </li>

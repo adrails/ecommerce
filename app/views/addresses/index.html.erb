@@ -5,7 +5,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:line_1) %></th>
       <th><%= model_class.human_attribute_name(:line_2) %></th>
       <th><%= model_class.human_attribute_name(:city) %></th>
@@ -13,16 +12,13 @@
       <th><%= model_class.human_attribute_name(:country) %></th>
       <th><%= model_class.human_attribute_name(:pincode) %></th>
       <th><%= model_class.human_attribute_name(:landmark) %></th>
-      <th><%= model_class.human_attribute_name(:profile_detail_id) %></th>
       <th><%= model_class.human_attribute_name(:nick_name) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @addresses.each do |address| %>
       <tr>
-        <td><%= link_to address.id, address_path(address) %></td>
         <td><%= address.line_1 %></td>
         <td><%= address.line_2 %></td>
         <td><%= address.city %></td>
@@ -30,9 +26,7 @@
         <td><%= address.country %></td>
         <td><%= address.pincode %></td>
         <td><%= address.landmark %></td>
-        <td><%= address.profile_detail_id %></td>
         <td><%= address.nick_name %></td>
-        <td><%=l address.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_address_path(address), :class => 'btn btn-mini' %>
