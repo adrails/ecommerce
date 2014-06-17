@@ -25,7 +25,12 @@
 						<%end%>
 						<% if User.admin?(current_user) %>
 							<li><%= link_to "Users", users_path %> </li>
-							<li><%= link_to "Retailers", retailer_requests_admins_path %> </li>
+							<li><%= link_to "Retailers", retailer_requests_admins_path %> 
+							<ul>
+								<li><a href="/product_categories">User  Request</a></li>
+									<li><a href="/product_brands">Product Approval</a></li>
+							</ul>
+							</li>
 							<li><%= link_to "Products", product_items_path %> 
 							<ul>
 								<li><a href="/product_categories">Categories</a></li>
