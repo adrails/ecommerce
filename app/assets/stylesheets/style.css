@@ -117,7 +117,7 @@ html {
 .myMenu li ul {
 	position:absolute;
 	visibility:hidden;
-	border-top:1px solid #fff;
+	border-top:2px solid #fff;
 	margin:0;
 	padding:0;
 }
