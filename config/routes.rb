@@ -21,9 +21,11 @@ ECommerce::Application.routes.draw do
 			get 'retailer_requests'
 			get 'assign'
 			get 'assign_item'
+			get 'product_approval'
 		end
 		member do
 			post 'approve_and_reject_retailer'
+			post 'approve_and_reject_product'
 		end
 	end
 	resources :customers

@@ -102,6 +102,24 @@ class AdminsController < ApplicationController
 		redirect_to product_items_path
 	end
 	
+	def product_approval
+		@products = ProductItem.find_all_by_is_active(false)
+	end
+	
+	def approve_and_reject_product
+		@product = ProductItem.find_by_id(params[:id])
+		if params[:approval] = "Yes"
+			@product.is_active = true
+			@product.save
+			flash[:notice] = "Request Approved Successfully!!"
+		elsif params[:approval] = "No"
+			@product.is_active = nil
+			@product.save
+			flash[:notice] = "Request Rejected Successfully!!"
+		end
+		redirect_to product_approval_admins_path
+	end
+	
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_admin

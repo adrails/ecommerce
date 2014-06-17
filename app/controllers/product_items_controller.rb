@@ -4,7 +4,11 @@ class ProductItemsController < ApplicationController
   # GET /product_items
   # GET /product_items.json
   def index
-    @product_items = ProductItem.all
+		if User.admin?(current_user)
+			@product_items = ProductItem.all
+		else
+			@product_items = current_user.product_items
+		end
   end
 
   # GET /product_items/1
@@ -26,9 +30,10 @@ class ProductItemsController < ApplicationController
   def create
     @product_item = ProductItem.new(product_item_params)
 		@product_item.user_id = current_user.id
+		@product_item.is_active = User.admin?(current_user) ? true : false
     respond_to do |format|
       if @product_item.save
-        format.html { redirect_to @product_item, notice: 'Product item was successfully created.' }
+        format.html { redirect_to product_items_path, notice: 'Product item was successfully created.' }
         format.json { render action: 'show', status: :created, location: @product_item }
       else
         format.html { render action: 'new' }
@@ -42,7 +47,7 @@ class ProductItemsController < ApplicationController
   def update
     respond_to do |format|
       if @product_item.update(product_item_params)
-        format.html { redirect_to @product_item, notice: 'Product item was successfully updated.' }
+        format.html { redirect_to product_items_path, notice: 'Product item was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :name, :role_type,:retailer_approval,:desc
 	
 	has_one :profile_detail
+	has_many :product_items
 	
 	def self.admin?(user)
 		if user.role_type == "ADMIN" && user.role_type != nil
