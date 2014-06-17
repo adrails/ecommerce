@@ -19,6 +19,8 @@ ECommerce::Application.routes.draw do
 	resources :admins do
 		collection do
 			get 'retailer_requests'
+			get 'assign'
+			get 'assign_item'
 		end
 		member do
 			post 'approve_and_reject_retailer'

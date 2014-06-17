@@ -28,7 +28,7 @@ class ProductBrandsController < ApplicationController
 
     respond_to do |format|
       if @product_brand.save
-        format.html { redirect_to @product_brand, notice: 'Product brand was successfully created.' }
+        format.html { redirect_to product_brands_path, notice: 'Product brand was successfully created.' }
         format.json { render action: 'show', status: :created, location: @product_brand }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class ProductBrandsController < ApplicationController
   def update
     respond_to do |format|
       if @product_brand.update(product_brand_params)
-        format.html { redirect_to @product_brand, notice: 'Product brand was successfully updated.' }
+        format.html { redirect_to product_brands_path, notice: 'Product brand was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

@@ -82,6 +82,26 @@ class AdminsController < ApplicationController
 		redirect_to retailer_requests_admins_path
 	end 
 	
+	def assign
+		@categories = ProductCategory.all
+		@brands = ProductBrand.all
+		@products = ProductItem.all
+	end
+	
+	def assign_item
+		@product_item = ProductItem.find(params[:Product].to_i)
+		if params[:Brand]
+			@product_item.product_brand_id=params[:Brand].to_i
+			@product_item.save
+			flash[:notice] = "Product assigned to brand successfully!"
+		elsif params[:Category]
+			@product_item.product_category_id=params[:Category].to_i
+			@product_item.save
+			flash[:notice] = "Product assigned to category successfully!"
+		end
+		redirect_to product_items_path
+	end
+	
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_admin

@@ -1,0 +1,19 @@
+<br>
+<div>
+	Assign To A Category
+	<%=form_tag("/admins/assign_item", method: "get") do %>
+		<%=select_tag "Category", options_from_collection_for_select(@categories, "id", "prod_name")%>
+		<%=select_tag "Product", options_from_collection_for_select(@products, "id", "title")%>
+		<%= submit_tag("Assign") %>
+	<% end %>
+</div>
+<div>
+	Assign To A Brand
+	<%=form_tag("/admins/assign_item", method: "get") do %>
+		<%=select_tag "Brand", options_from_collection_for_select(@brands, "id", "brand_name")%>
+		<%=select_tag "Product", options_from_collection_for_select(@products, "id", "title")%>
+		<%= submit_tag("Assign") %>
+	<% end %>
+</div>
+
+
