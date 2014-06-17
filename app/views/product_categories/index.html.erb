@@ -9,8 +9,7 @@
 		<thead>
 			<tr>
 				<th><%= model_class.human_attribute_name(:id) %></th>
-				<th><%= model_class.human_attribute_name(:prod_name) %></th>
-				<th><%= model_class.human_attribute_name(:created_at) %></th>
+				<th>Category</th>
 				<th><%=t '.actions', :default => t("helpers.actions") %></th>
 			</tr>
 		</thead>
@@ -19,7 +18,6 @@
 				<tr>
 					<td><%= link_to product_category.id, product_category_path(product_category) %></td>
 					<td><%= product_category.prod_name %></td>
-					<td><%=l product_category.created_at %></td>
 					<td>
 						<%= link_to t('.edit', :default => t("helpers.links.edit")),
 												edit_product_category_path(product_category), :class => 'btn btn-mini' %>
@@ -35,6 +33,6 @@
 	</table>
 <% end %>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
+<%= link_to t('.new', :default => "Create"),
             new_product_category_path,
-            :class => 'btn btn-primary' %>
+            :class => 'btn btn-primary', :style=>"color:white;" %>
