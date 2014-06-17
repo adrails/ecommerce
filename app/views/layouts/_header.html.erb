@@ -9,13 +9,12 @@
 				<span class="glyphicon glyphicon-align-justify"></span>
 			</button>
 			<nav class="navbar-collapse collapse" role="navigation">
-				<ul class="navbar-nav nav myMenu" >
-					<li><a href="#">Home</a></li>
+				<ul class="navbar-nav nav myMenu navigation" >
+					<li class="highlight"><a href="#">Home</a></li>
 					<li><a href="#">About</a></li>
 					<li><a href="#">Contact</a></li>
 					<li><a href="/home/info_graphics">Ecommerce Overview</a></li>
-					
-
+				
 					<% if user_signed_in? %>
 
 						<% if !current_user.profile_detail.nil? %>
@@ -75,6 +74,16 @@
 		};
 				   
 	});
+
+var str=location.href.toLowerCase();
+$(".navigation li a").each(function() {
+if (str.indexOf(this.href.toLowerCase()) > -1) {
+ $("li.highlight").removeClass("highlight");
+$(this).parent().addClass("highlight");
+}
+ });
+
+
 </script>
 </body>
 
