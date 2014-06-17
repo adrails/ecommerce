@@ -6,8 +6,8 @@ class CreateProductItems < ActiveRecord::Migration
       t.string :description
       t.float :price
       t.integer :user_id
-      t.integer :pro_category_id
-      t.integer :pro_brand_id
+      t.integer :product_category_id
+      t.integer :product_brand_id
       t.boolean :is_active
 
       t.timestamps

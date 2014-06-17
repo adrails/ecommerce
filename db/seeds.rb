@@ -12,5 +12,7 @@ user_list = [
 
 
 user_list.each do |user|
-  User.create( :name=>user[0], :email=>user[1], :password=>user[2], :password_confirmation =>user[3], :role_type=>user[4] )
+  user = User.new( :name=>user[0], :email=>user[1], :password=>user[2], :password_confirmation =>user[3], :role_type=>user[4] )
+	user.skip_confirmation!
+	user.save
 end
