@@ -24,12 +24,12 @@
 						<%else%>
 							<li><%= link_to "Profile", new_profile_detail_path%> </li>
 						<%end%>
-						<% if User.identify_role_type?(current_user) %>
+						<% if User.admin?(current_user) %>
 							<li><%= link_to "Manage customers", users_path %> </li>
 							<li><%= link_to "Retailer requests", retailer_requests_admins_path %> </li>
 							<li><%= link_to "Manage products", product_items_path %> </li>
 						<%end%>
-						<% if User.identify_role_type?(current_user)%>
+						<% if User.retailer?(current_user)%>
 							<li><%= link_to "Manage products", product_items_path %> </li>
 						<%end%>
 							<li><%= link_to "Logout", destroy_user_session_path, :method=> :delete%></li>

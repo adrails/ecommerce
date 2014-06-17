@@ -16,4 +16,14 @@ class User < ActiveRecord::Base
 			return false
 		end
 	end
+	
+	
+	def self.retailer?(user)
+		if user.role_type == "RETAILER" && user.role_type != nil
+			return true
+		else
+			return false
+		end
+	end
+
 end

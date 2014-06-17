@@ -22,7 +22,7 @@
 		<%=f.hidden_field :password, :value=>@password%>
 		<%=f.hidden_field :password_confirmation, :value=>@password%>
 	<% else %>
-		<%= f.hidden_field :role_type, value: "CUSTOMER" %>
+		<%= f.hidden_field :role_type, :value=>"CUSTOMER" %>
 		<div><%= f.label :password %><br />
 			<%= f.password_field :password, autocomplete: "off" %></div>
 
