@@ -1,0 +1,42 @@
+<%- model_class = ProductItem -%>
+<div class="page-header">
+  <h1>Product Requests</h1>
+</div>
+<% if !@products.present? %>
+	Sorry!! No Requests Found
+<% else %>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th><%= model_class.human_attribute_name(:id) %></th>
+				<th><%= model_class.human_attribute_name(:title) %></th>
+				<th><%= model_class.human_attribute_name(:description) %></th>
+				<th><%= model_class.human_attribute_name(:available_quantity) %></th>
+				<th><%= model_class.human_attribute_name(:price) %></th>
+				<th>Retailer</th>
+				<th><%=t '.actions', :default => t("helpers.actions") %></th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @products && @products.each do |product| %>
+				<tr>
+					<td><%= link_to product.id, product_item_path(product) %></td>
+					<td><%= product.title %></td>
+					<td><%= product.description %></td>
+					<td><%= product.available_quantity %></td>
+					<td><%= product.price %></td>
+					<td><%= product.user.name %></td>
+					<td>
+					<%= button_to "Approve", approve_and_reject_product_admin_path(product,:approval=>"Yes"), data: { confirm: "Are you sure?" }, :class => 'btn btn-mini btn-danger' %>
+					<%= button_to "Reject", approve_and_reject_product_admin_path(product,:approval=>"No"), data: { confirm: "Are you sure?" }, :class => 'btn btn-mini btn-danger' %>
+
+						
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+	<!--%= link_to t('.new', :default => t("helpers.links.new")),new_product_path,:class => 'btn btn-primary' %-->
+<% end %>
+
+
