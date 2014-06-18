@@ -111,10 +111,12 @@ class AdminsController < ApplicationController
 		if params[:approval] = "Yes"
 			@product.is_active = true
 			@product.save
+			Notifier.convey_appoval_to_retailer(@product).deliver
 			flash[:notice] = "Request Approved Successfully!!"
 		elsif params[:approval] = "No"
 			@product.is_active = nil
 			@product.save
+			Notifier.convey_reject_to_retailer(@product).deliver
 			flash[:notice] = "Request Rejected Successfully!!"
 		end
 		redirect_to product_approval_admins_path

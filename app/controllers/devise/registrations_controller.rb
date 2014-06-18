@@ -33,6 +33,7 @@ class Devise::RegistrationsController < DeviseController
 			resource.skip_confirmation!
 			if resource.save
 				ProfileDetail.create(:contact_no =>params[:retailer][:contact_no], :gender => params[:retailer][:gender],:user_id=>resource.id)
+				Notifier.retailer_request(resource).deliver
 				flash[:notice] ="Thanks for your sign up! Our Admin will contact you soon!!"
 				redirect_to root_path
 			end

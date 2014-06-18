@@ -19,9 +19,17 @@
 
 						<% if !current_user.profile_detail.nil? %>
 							<% @profile_id = ProfileDetail.find_by_user_id(current_user.id) %>
-							<li><%= link_to "Profile", edit_profile_detail_path(@profile_id)%> </li>
+							<li><%= link_to "Profile", edit_profile_detail_path(@profile_id)%> 
+								<ul>
+									<li><%= link_to "Change Password", edit_user_registration_path%></li>
+								</ul>
+							</li>
 						<%else%>
-							<li><%= link_to "Profile", new_profile_detail_path%> </li>
+							<li><%= link_to "Profile", new_profile_detail_path%>								
+								<ul>
+									<li><%= link_to "Change Password", edit_user_registration_path%></li>
+								</ul>
+							</li>
 						<%end%>
 						<% if User.admin?(current_user) %>
 							<li><%= link_to "Users", users_path %> </li>

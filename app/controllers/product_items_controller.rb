@@ -29,10 +29,18 @@ class ProductItemsController < ApplicationController
   # POST /product_items.json
   def create
     @product_item = ProductItem.new(product_item_params)
+		if params[:images]
+        params[:images].each { |image|
+          @product_item.pictures.create(image: image)
+        }
+		end
 		@product_item.user_id = current_user.id
 		@product_item.is_active = User.admin?(current_user) ? true : false
     respond_to do |format|
       if @product_item.save
+				if !User.admin?(current_user)
+					Notifier.send_product_create_notification(@product_item).deliver
+				end
         format.html { redirect_to product_items_path, notice: 'Product item was successfully created.' }
         format.json { render action: 'show', status: :created, location: @product_item }
       else
