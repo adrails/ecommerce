@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 		elsif user.role_type == "RETAILER"
 		 retailers_path
 		else 
-		 customers_path
+		 product_items_path
 		end
 	end
 

@@ -1,3 +1,4 @@
+require 'will_paginate/array'
 class ProductItemsController < ApplicationController
   before_action :set_product_item, only: [:show, :edit, :update, :destroy]
 
@@ -6,8 +7,11 @@ class ProductItemsController < ApplicationController
   def index
 		if User.admin?(current_user)
 			@product_items = ProductItem.all.paginate(:page => params[:page], :per_page => 4)
-		else
+		elsif User.retailer?(current_user)
 			@product_items = current_user.product_items.paginate(:page => params[:page], :per_page => 4)
+		else
+			@product_items = ProductItem.find_all_by_is_active(true).paginate(:page => params[:page], :per_page => 4)
+		#	@products = @product_items.paginate(:page => params[:page], :per_page => 4)
 		end
   end
 

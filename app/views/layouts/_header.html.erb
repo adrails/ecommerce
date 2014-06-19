@@ -35,7 +35,7 @@
 							<li><%= link_to "Users", users_path %> </li>
 							<li><%= link_to "Retailers", retailer_requests_admins_path %> 
 							<ul>
-								<li><a href="/product_categories">User  Request</a></li>
+								<li><a href="/admins/retailer_requests">User  Request</a></li>
 									<li><a href="/admins/product_approval">Product Approval</a></li>
 							</ul>
 							</li>
@@ -47,6 +47,7 @@
 							</ul>
 							</li>
 						<%end%>
+						<li><%= link_to "Products", product_items_path %> </li>
 						<% if User.retailer?(current_user)%>
 							<li><%= link_to "Products", product_items_path %> </li>
 						<%end%>

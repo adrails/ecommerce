@@ -62,7 +62,9 @@ class AdminsController < ApplicationController
   end
 	
 	def retailer_requests
+		p "#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
 		@users = User.find_all_by_role_type_and_retailer_approval("RETAILER",false)
+		p @users
 	end
 
 	def approve_and_reject_retailer
