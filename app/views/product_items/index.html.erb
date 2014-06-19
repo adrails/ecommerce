@@ -1,11 +1,37 @@
 <%- model_class = ProductItem -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1>Products</h1>
 </div>
 <% if !@product_items.present? %>
 	Sorry!! No Products Found
 <% else %>
-	<table class="table table-striped">
+	<% @product_items.each do |product_item| %>
+	<div class="divOuter">
+		<div class="divInner1"> 
+			<% if product_item.pictures.present?%>
+				<%= link_to "#{image_tag product_item.pictures.first.image.url(:medium)}".html_safe, product_item_path(product_item)%>
+			<% end %>
+		</div>
+		<div class="divInner2">
+			Item ID <%= link_to product_item.id, product_item_path(product_item) %><br>
+			Title <%= product_item.title %><br>
+			Available Quality <%= product_item.available_quantity %><br>
+			Description <%= product_item.description %><br>
+			Price <%= product_item.price %><br>
+			Active <%= product_item.is_active %><br>		
+			<%if product_item.user_id == current_user.id %>
+				<%= link_to t('.edit', :default => t("helpers.links.edit")),edit_product_item_path(product_item), :class => 'btn btn-mini' %>
+				<%= link_to t('.destroy', :default => t("helpers.links.destroy")),product_item_path(product_item),:method => :delete,:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },:class => 'btn btn-mini btn-danger' %>
+			<% end %>
+		</div>
+	</div>
+	<% end %>
+<% end %>	
+<%= link_to t('.new', :default => "Create"),new_product_item_path,:class => 'btn btn-primary', :style=>"color:white;" %>
+
+
+<%= will_paginate @product_items, renderer: BootstrapPagination::Rails %>
+	<!--table class="table table-striped">
 		<thead>
 			<tr>
 				<th><%= model_class.human_attribute_name(:id) %></th>
@@ -35,7 +61,7 @@
 				</tr>
 			<% end %>
 		</tbody>
-	</table>
-<% end %>
+	</table-->
 
-<%= link_to t('.new', :default => "Create"),new_product_item_path,:class => 'btn btn-primary', :style=>"color:white;" %>
+
+

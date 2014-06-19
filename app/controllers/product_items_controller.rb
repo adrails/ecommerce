@@ -5,9 +5,9 @@ class ProductItemsController < ApplicationController
   # GET /product_items.json
   def index
 		if User.admin?(current_user)
-			@product_items = ProductItem.all
+			@product_items = ProductItem.all.paginate(:page => params[:page], :per_page => 4)
 		else
-			@product_items = current_user.product_items
+			@product_items = current_user.product_items.paginate(:page => params[:page], :per_page => 4)
 		end
   end
 
@@ -29,15 +29,15 @@ class ProductItemsController < ApplicationController
   # POST /product_items.json
   def create
     @product_item = ProductItem.new(product_item_params)
-		if params[:images]
-        params[:images].each { |image|
-          @product_item.pictures.create(image: image)
-        }
-		end
 		@product_item.user_id = current_user.id
 		@product_item.is_active = User.admin?(current_user) ? true : false
     respond_to do |format|
       if @product_item.save
+				if params[:images]
+					params[:images].each { |image|
+						@product_item.pictures.create(image: image)
+					}
+				end
 				if !User.admin?(current_user)
 					Notifier.send_product_create_notification(@product_item).deliver
 				end
@@ -55,6 +55,11 @@ class ProductItemsController < ApplicationController
   def update
     respond_to do |format|
       if @product_item.update(product_item_params)
+				if params[:images]
+					params[:images].each { |image|
+						@product_item.pictures.create(image: image)
+					}
+				end
         format.html { redirect_to product_items_path, notice: 'Product item was successfully updated.' }
         format.json { head :no_content }
       else

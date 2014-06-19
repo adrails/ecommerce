@@ -139,3 +139,19 @@ html {
 
 ul.navigation li.highlight{ background:#666;}
 ul.navigation li.highlight a{ color:#f5f5f5; cursor:default; background:#474747}
+
+
+
+   .divOuter{
+        display:inline;
+        text-align:center;
+    }
+
+    .divInner1, .divInner2, .divInner3{
+        border: 1px solid;
+        float:left;
+        width:150px;
+        height:150px;
+        margin-left:3px;
+        margin-right:3px;
+    }

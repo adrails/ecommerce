@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
@@ -19,6 +19,8 @@ gem 'pg'
 gem "paperclip", "~> 4.1"
 #Add the old functionality of attr_accessible again to rails 4.0
 gem 'protected_attributes'
+
+gem 'will_paginate-bootstrap'
 
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
