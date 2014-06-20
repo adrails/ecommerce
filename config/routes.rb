@@ -3,6 +3,7 @@ ECommerce::Application.routes.draw do
   resources :carts do
 		collection do
 			get 'my_cart'
+			delete 'remove_from_my_cart'
 		end
 	end
 	
