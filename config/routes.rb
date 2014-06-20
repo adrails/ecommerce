@@ -1,6 +1,11 @@
 ECommerce::Application.routes.draw do
 
-  resources :carts
+  resources :carts do
+		collection do
+			get 'my_cart'
+		end
+	end
+	
 
   resources :product_brands
 

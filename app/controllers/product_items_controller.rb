@@ -10,6 +10,7 @@ class ProductItemsController < ApplicationController
 		elsif User.find_role?(current_user) == "B"
 			@product_items = current_user.product_items.paginate(:page => params[:page], :per_page => 4)
 		else
+			#@cart_items = Cart.find_all_by_user_id(current_user.id)
 			@product_items = ProductItem.find_all_by_is_active(true).paginate(:page => params[:page], :per_page => 4)
 		#	@products = @product_items.paginate(:page => params[:page], :per_page => 4)
 		end
