@@ -5,9 +5,9 @@ class ProductItemsController < ApplicationController
   # GET /product_items
   # GET /product_items.json
   def index
-		if User.admin?(current_user)
+		if User.find_role?(current_user) == "A"
 			@product_items = ProductItem.all.paginate(:page => params[:page], :per_page => 4)
-		elsif User.retailer?(current_user)
+		elsif User.find_role?(current_user) == "B"
 			@product_items = current_user.product_items.paginate(:page => params[:page], :per_page => 4)
 		else
 			@product_items = ProductItem.find_all_by_is_active(true).paginate(:page => params[:page], :per_page => 4)
@@ -34,7 +34,7 @@ class ProductItemsController < ApplicationController
   def create
     @product_item = ProductItem.new(product_item_params)
 		@product_item.user_id = current_user.id
-		@product_item.is_active = User.admin?(current_user) ? true : false
+		@product_item.is_active = User.find_role?(current_user) == "A" ? true : false
     respond_to do |format|
       if @product_item.save
 				if params[:images]
@@ -42,7 +42,7 @@ class ProductItemsController < ApplicationController
 						@product_item.pictures.create(image: image)
 					}
 				end
-				if !User.admin?(current_user)
+				if !User.find_role?(current_user) == "A"
 					Notifier.send_product_create_notification(@product_item).deliver
 				end
         format.html { redirect_to product_items_path, notice: 'Product item was successfully created.' }

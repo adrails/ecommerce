@@ -1,5 +1,7 @@
 ECommerce::Application.routes.draw do
 
+  resources :carts
+
   resources :product_brands
 
   resources :product_categories
@@ -32,9 +34,7 @@ ECommerce::Application.routes.draw do
 	resources :addresses
 	resources :users
 	resources :retailers
-	resources :home do
-		#~ get :search, :on => :collection
-	end
+
 	# Example of regular route:
   get 'home/info_graphics' => 'home#info_graphics'
   get 'home/search' => 'home#search'

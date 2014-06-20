@@ -24,10 +24,13 @@
 				<%= link_to t('.destroy', :default => t("helpers.links.destroy")),product_item_path(product_item),:method => :delete,:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },:class => 'btn btn-mini btn-danger' %>
 			<% end %>
 		</div>
+		<%= link_to t('.new', :default => "Add to Mycart"),new_cart_path,:class => 'btn btn-primary', :style=>"color:white;" %>
 	</div>
 	<% end %>
 <% end %>	
-<%= link_to t('.new', :default => "Create"),new_product_item_path,:class => 'btn btn-primary', :style=>"color:white;" %>
+<%if current_user.role_type == "ADMIN" || current_user.role_type == "RETAILER"%>
+	<%= link_to t('.new', :default => "Create"),new_product_item_path,:class => 'btn btn-primary', :style=>"color:white;" %>
+<%end%>
 
 
 <%= will_paginate @product_items, renderer: BootstrapPagination::Rails %>

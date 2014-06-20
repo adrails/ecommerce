@@ -10,20 +10,15 @@ class User < ActiveRecord::Base
 	has_one :profile_detail
 	has_many :product_items
 	
-	def self.admin?(user)
-		if user.role_type == "ADMIN" && user.role_type != nil
-			return true
+	def self.find_role?(user)
+		if user.role_type == "ADMIN"
+			return "A"
+		elsif user.role_type == "RETAILER"
+			return "B"
+		elsif user.role_type == "CUSTOMER"
+			return "C"
 		else
-			return false
-		end
-	end
-	
-	
-	def self.retailer?(user)
-		if user.role_type == "RETAILER" && user.role_type != nil
-			return true
-		else
-			return false
+			return nil
 		end
 	end
 
