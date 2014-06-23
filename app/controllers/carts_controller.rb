@@ -4,7 +4,7 @@ class CartsController < ApplicationController
   # GET /carts
   # GET /carts.json
   def index
-    @carts = Cart.all
+    @cart = current_user.cart
   end
 
   # GET /carts/1
@@ -25,7 +25,8 @@ class CartsController < ApplicationController
   # POST /carts.json
   def create
     @cart = Cart.new(cart_params)
-
+		@cart.user_id = current_user.id
+		@cart.product_item_ids = param[:product_item_ids]
     respond_to do |format|
       if @cart.save
         format.html { redirect_to @cart, notice: 'Cart was successfully created.' }
@@ -61,6 +62,41 @@ class CartsController < ApplicationController
     end
   end
 
+	def my_cart
+		@cart = Cart.find_by_user_id(params[:user_id])
+		@products_ids = @cart.product_item_ids
+		@new_product_id = params[:product_item_ids].to_i
+		if @products_ids.nil?
+			@cart.product_item_ids = [@new_product_id]
+		else
+			@cart.product_item_ids = [@products_ids,@new_product_id].flatten.uniq
+		end
+		respond_to do |format|
+      if @cart.save
+        format.html { redirect_to carts_path, notice: 'Cart was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @cart.errors, status: :unprocessable_entity }
+      end
+    end
+	end
+	
+	def remove_from_my_cart
+		@cart = Cart.find_by_user_id(current_user.id)
+		@cart.product_item_ids.delete(params[:product_id].to_i)
+		p @cart.product_item_ids
+		respond_to do |format|
+      if @cart.save
+        format.html { redirect_to carts_path, notice: 'Cart was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @cart.errors, status: :unprocessable_entity }
+      end
+    end
+	end
+	
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cart

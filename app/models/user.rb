@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+	after_create :create_cart
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -9,6 +10,7 @@ class User < ActiveRecord::Base
 	
 	has_one :profile_detail
 	has_many :product_items
+	has_one :cart, dependent: :destroy
 	
 	def self.find_role?(user)
 		if user.role_type == "ADMIN"
@@ -22,4 +24,8 @@ class User < ActiveRecord::Base
 		end
 	end
 
+	def self.create_cart
+		self.cart.create
+	end
+	
 end
