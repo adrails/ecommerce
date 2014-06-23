@@ -36,7 +36,8 @@ ECommerce::Application.routes.draw do
 	resources :retailers
 
 	# Example of regular route:
-  get 'home/info_graphics' => 'home#info_graphics'
+  get 'home/info_graphics_ecommerce' => 'home#info_graphics_ecommerce'
+  get 'home/info_graphics_youtube' => 'home#info_graphics_youtube'
   get 'home/search' => 'home#search'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
