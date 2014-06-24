@@ -2,10 +2,9 @@
 <div class="page-header">
   <h1>Products</h1>
 </div>
-<% if !@cart.present? %>
+<% if !@cart.product_item_ids.present? %>
 	Sorry!! No Products Found
 <% else %>
-	<%@cart_id = @cart.id%>
 	<% @cart.product_item_ids.each do |product_item| %>
 	<div class="divOuter">
 		<div class="divInner1"> 
@@ -29,7 +28,10 @@
 			<%= link_to t('.destroy', :default => "Remove"),remove_from_my_cart_carts_path(:product_id=>product_item.id),:method => :delete,:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },:class => 'btn btn-mini btn-danger' %>
 		</div>
 	<% end %>
-<% end %>	
+	<%=link_to(image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), orders_billing_info_path)%>
+<% end %>
+
+
 
 
 

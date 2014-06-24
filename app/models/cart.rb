@@ -4,5 +4,5 @@ class Cart < ActiveRecord::Base
 	
 	belongs_to :user
 	serialize :product_item_ids
-	
+	has_many :orders
 end

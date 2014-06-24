@@ -1,0 +1,16 @@
+development:
+  login_id: ambruthar-facilitator_api1.smartek21.com
+  transaction_key: AFcWxV21C7fd0v3bYYYRCpSSRl31AhDJNZGdkoiEhw7tZ.ikVaQ-e30l
+  password: 1403600814
+  mode:  test
+  
+production:
+  login_id: ambruthar-facilitator_api1.smartek21.com
+  transaction_key: AFcWxV21C7fd0v3bYYYRCpSSRl31AhDJNZGdkoiEhw7tZ.ikVaQ-e30l
+  password: 1403600814
+  mode:  production
+
+test:
+  login_id: XXXXXXXXXXXXXX
+  transaction_key: YYYYYYYYYYYYYYYYY
+  mode:  test

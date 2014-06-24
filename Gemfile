@@ -9,6 +9,7 @@ gem "mongoid", github: "mongoid/mongoid"
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 gem 'devise'
+gem 'haml'
 gem "twitter-bootstrap-rails"
 gem "less-rails"
 gem "bson_ext"
@@ -16,7 +17,10 @@ gem "bson_ext"
 gem 'uglifier', '>= 1.3.0'
 gem 'heroku'
 gem 'pg'
+gem 'activemerchant'
 gem 'rails4-autocomplete'
+gem 'authorize-net'
+gem 'braintree'
 gem "paperclip", "~> 4.1"
 #Add the old functionality of attr_accessible again to rails 4.0
 gem 'protected_attributes'
