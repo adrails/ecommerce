@@ -1,7 +1,10 @@
      <div class="header-top">
 	   <div class="wrap"> 
 			  <div class="header-top-left">
-			  	   <div class="box">
+				<% if user_signed_in? %>
+					<%=current_user.name%>
+				<% end %>
+			  	   <!--div class="box">
    				      <select tabindex="4" class="dropdown">
 							<option value="" class="label" value="">Language :</option>
 							<option value="1">English</option>
@@ -15,7 +18,7 @@
 							<option value="1">$ Dollar</option>
 							<option value="2">€ Euro</option>
 						</select>
-   				    </div>
+   				    </div-->
    				    <div class="clear"></div>
    			 </div>
 			 <div class="cssmenu">
@@ -53,8 +56,6 @@
 			<div class="clear"></div>
  		</div>
 	</div>
-	<p class="notice_msg"><%= notice %></p>
-<p class="alert_msg"><%= alert %></p>
 	<div class="header-bottom">
 	    <div class="wrap">
 			<div class="header-bottom-left">
