@@ -1,3 +1,33 @@
+<div class="register_account">
+	<div class="wrap">
+		<h4 class="title">Your Profile Details</h4>
+<%= form_for @profile_detail, :html => { :class => 'form-horizontal', :multipart => true  } do |f| %>
+			<div class="col_1_of_2 span_1_of_2">
+			<div>
+				<%if @profile_detail.avatar.nil?%>
+					<%= f.file_field :avatar %>
+				<%else%>
+					<%= image_tag @profile_detail.avatar.url(:thumb) %>
+					<%= f.file_field :avatar %>
+				<%end%>
+			</div>
+				<div><%= f.text_field :name,:value=>"contact_no",:onfocus=>"this.value = '';" ,:onblur=>"if (this.value == '') {this.value = 'Name';}"%></div>
+				<div><%= f.text_field :dob, :placeholder=>"dob"%></div>
+				<%= f.hidden_field :doj, :value => Time.now %>
+				<div><input type="text" name="user[email]" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-Mail';}"></div>
+				
+				<%= f.button "Create a Profile", :class=>"grey" %>
+				<p class="terms">By clicking 'Create Account' you agree to the <a href="#">Terms &amp; Conditions</a>.</p>
+				</div>
+			</div>
+			<%= link_to "Send Request for a Retailer",new_user_registration_path(:retailer=>"Retailer"), :class=>"grey"%>
+			<div class="clear"></div>
+		<% end %>
+	</div>
+</div>
+    
+		
+
 <%= form_for @profile_detail, :html => { :class => 'form-horizontal', :multipart => true  } do |f| %>
   <div class="control-group">
     <%= f.label :profile_picture, :class => 'control-label' %>

@@ -21,6 +21,20 @@
 			 <div class="cssmenu">
 				<% if user_signed_in? %>
 				<ul>
+					<% if !current_user.profile_detail.nil? %>
+						<% @profile_id = ProfileDetail.find_by_user_id(current_user.id) %>
+						<li><%= link_to "Profile", edit_profile_detail_path(@profile_id)%> </li>
+					<%else%>
+						<li><%= link_to "Profile", new_profile_detail_path%> </li>
+					<%end%>
+					 <% if User.find_role?(current_user) %>
+					 <li><%= link_to "Users", users_path %> </li>
+					 <li><%= link_to "Retailers", retailer_requests_admins_path %> </li>
+					 <li><%= link_to "Products", product_items_path %> </li>
+					<%end%>
+					 <% if User.find_role?(current_user)%>
+						<li><%= link_to "Products", product_items_path %> </li>
+					<%end%>
 					<li><%= link_to "Logout", destroy_user_session_path, :method=> :delete%></li>
 				</ul>
 				<%else%>
@@ -37,6 +51,8 @@
 			<div class="clear"></div>
  		</div>
 	</div>
+	<p class="notice_msg"><%= notice %></p>
+<p class="alert_msg"><%= alert %></p>
 	<div class="header-bottom">
 	    <div class="wrap">
 			<div class="header-bottom-left">
