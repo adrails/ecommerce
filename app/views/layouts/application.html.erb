@@ -19,6 +19,10 @@
 	</head>
 	<body>
 		<%= render "layouts/header" %>
+		<div>
+			<p class="notice_msg"><%= notice %></p>
+			<p class="alert_msg"><%= alert %></p>
+		</div>
 		<%=yield%>
 		<%= render "layouts/footer" %>
 	</body>
