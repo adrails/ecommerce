@@ -6,13 +6,26 @@
 			<div class="col_1_of_2 span_1_of_2">
 				<div><%= f.text_field :name,:value=>"Name",:onfocus=>"this.value = '';" ,:onblur=>"if (this.value == '') {this.value = 'Name';}"%></div>
 				<div><input type="text" name="user[email]" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-Mail';}"></div>
-				<div><input type="text" name="user[password]" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}"></div>	
-				<div><input type="text" name="user[password_confirmation]" value="Password Confirmation" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password confirmation';}"></div>
-				<div>
+				<%if params[:retailer]%>
+					<%= f.hidden_field :role_type, value: "RETAILER" %>
+					<%= f.hidden_field :retailer_approval, value: false %>
+					<div><input type="text" rows="4" cols="50" name="user[desc]" value="Description" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Description';}"></div>
+					<div><input type="text" name="retailer[contact_no]" value="Contact No" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Contact No';}"></div>
+					<div><input type="text" name="retailer[gender]" value="Gender" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Gender';}"></div>
+					<% @password = (0..10).map { ('A'..'Z').to_a[rand(26)] }.join%>
+					<%=f.hidden_field :password, :value=>@password%>
+					<%=f.hidden_field :password_confirmation, :value=>@password%>
+				<% else %>
+					<%= f.hidden_field :role_type, :value=>"CUSTOMER" %>	
+					<div><input type="text" name="user[password]" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}"></div>	
+					<div><input type="text" name="user[password_confirmation]" value="Password Confirmation" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password confirmation';}"></div>
+					<div>
+				<% end %>
 				<%= f.button "Sign up", :class=>"grey" %>
 				<p class="terms">By clicking 'Create Account' you agree to the <a href="#">Terms &amp; Conditions</a>.</p>
 				</div>
 			</div>
+			<%= link_to "Send Request for a Retailer",new_user_registration_path(:retailer=>"Retailer"), :class=>"grey"%>
 			<div class="clear"></div>
 		<% end %>
 	</div>
