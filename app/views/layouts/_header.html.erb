@@ -51,7 +51,7 @@
 							<li><%= link_to "Products", product_items_path %> </li>
 						<%end%>
 							<% if User.find_role?(current_user) == "C"%>
-							<%if current_user.cart.product_item_ids && current_user.cart.product_item_ids%>
+							<%if current_user.cart && current_user.cart.product_item_ids.present? %>
 								<li><%= link_to "My Cart (#{current_user.cart.product_item_ids.count})", carts_path %> </li>
 							<%else%>
 								<li><%= link_to "My Cart", carts_path %> </li>
