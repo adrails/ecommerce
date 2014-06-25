@@ -36,3 +36,157 @@
 <% end %>
 
 <!--%= link_to t('.new', :default => t("helpers.links.new")),new_user_path,:class => 'btn btn-primary' %-->
+
+
+
+
+<body>
+ <!-- Site header and navigation -->
+ <header class="top" role="header">
+  <div class="container">
+   <a href="#" class="navbar-brand pull-left">
+    Smartek Ecommerce
+   </a>
+   <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+    <span class="glyphicon glyphicon-align-justify"></span>
+   </button>
+   <nav class="navbar-collapse collapse" role="navigation">
+    <ul class="navbar-nav nav myMenu navigation" >
+     <li class="highlight"><a href="#">Home</a></li>
+     <li><a href="#">About</a></li>
+     <li><a href="#">Contact</a></li>
+     <li><a href="/home/info_graphics_ecommerce">Ecommerce Overview</a></li>
+     <li><%= link_to "Youtube Overview", "/home/info_graphics_youtube"%></li>
+     <% if user_signed_in? %>
+      <% if !current_user.profile_detail.nil? %>
+       <% @profile_id = ProfileDetail.find_by_user_id(current_user.id) %>
+       <li><%= link_to "Profile", edit_profile_detail_path(@profile_id)%> 
+        <ul>
+         <li><%= link_to "Change Password", edit_user_registration_path%></li>
+        </ul>
+       </li>
+      <%else%>
+       <li><%= link_to "Profile", new_profile_detail_path%>        
+        <ul>
+         <li><%= link_to "Change Password", edit_user_registration_path%></li>
+        </ul>
+       </li>
+      <%end%>
+      <% if User.find_role?(current_user) == "A"%>
+       <li><%= link_to "Users", users_path %> </li>
+       <li><%= link_to "Retailers", retailer_requests_admins_path %> 
+       <ul>
+        <li><a href="/admins/retailer_requests">User  Request</a></li>
+         <li><a href="/admins/product_approval">Product Approval</a></li>
+       </ul>
+       </li>
+       <li><%= link_to "Products", product_items_path %> 
+       <ul>
+        <li><a href="/product_categories">Categories</a></li>
+         <li><a href="/product_brands">Brands</a></li>
+         <li><a href="/admins/assign">Assign</a></li>
+       </ul>
+       </li>
+      <%end%>
+      <li><%= link_to "Products", product_items_path %> </li>
+      <% if User.find_role?(current_user) == "B"%>
+       <li><%= link_to "Products", product_items_path %> </li>
+      <%end%>
+       <% if User.find_role?(current_user) == "C"%>
+       <%if current_user.cart.product_item_ids && current_user.cart.product_item_ids%>
+        <li><%= link_to "My Cart (#{current_user.cart.product_item_ids.count})", carts_path %> </li>
+       <%else%>
+        <li><%= link_to "My Cart", carts_path %> </li>
+       <% end %>
+      <%end%>
+       <li><%= link_to "Logout", destroy_user_session_path, :method=> :delete%></li>
+
+     <% else %>
+      <li><%= link_to "Sign up", new_user_registration_path %> </li>
+      <li> <%= link_to "Sign in", new_user_session_path%></li>
+      <li> <%= link_to "Send retailer request", new_user_registration_path(:retailer=>"Retailer")%></li>
+     <% end %>
+    </ul>
+   </nav>
+  </div>
+ </header>
+
+ <!-- Site banner -->
+ <div class="banner" >
+  <div class="container" >
+   <h1>Shop Me</h1>
+   <!--p>It's amazing how easy the Internet makes it to destroy a business without creating another one in its place.</p-->
+   <form action="/home/search">
+    <center>
+     <div>
+      <span style="font-size:25px;">Search</span>&nbsp;&nbsp;&nbsp;
+      <input type="text" name="key"placeholder="search here" align="right" style="height:30px;width:500px;">
+     </div>
+    </center>
+   </form>
+  </div>
+ </div>
+
+ <!-- Include jQuery and bootstrap JS plugins -->
+ <script src="/assets/jquery-2.1.0.min.js"></script>
+ <script src="/assets/bootstrap.min.js"></script>
+ <script type="text/javascript">
+ $(document).ready(function() {
+  $('.myMenu > li').bind('mouseover', openSubMenu);
+  $('.myMenu > li').bind('mouseout', closeSubMenu);
+  
+  function openSubMenu() {
+   $(this).find('ul').css('visibility', 'visible'); 
+  };
+  
+  function closeSubMenu() {
+   $(this).find('ul').css('visibility', 'hidden'); 
+  };
+       
+ });
+
+var str=location.href.toLowerCase();
+$(".navigation li a").each(function() {
+if (str.indexOf(this.href.toLowerCase()) > -1) {
+ $("li.highlight").removeClass("highlight");
+$(this).parent().addClass("highlight");
+}
+ });
+
+
+</script>
+</body>
+
+
+
+
+
+	<% if user_signed_in? %>
+				<ul>
+					<% if !current_user.profile_detail.nil? %>
+						<% @profile_id = ProfileDetail.find_by_user_id(current_user.id) %>
+						<li><%= link_to "Profile", edit_profile_detail_path(@profile_id)%> </li>
+					<%else%>
+						<li><%= link_to "Profile", new_profile_detail_path%> </li>
+					<%end%>
+					 <% if User.find_role?(current_user) == "A" %>
+					 <li><%= link_to "Users", users_path %> </li>
+					 <li><%= link_to "Retailers", retailer_requests_admins_path %> </li>
+					 <li><%= link_to "Products", product_items_path %> </li>
+					<%end%>
+					 <% if User.find_role?(current_user) == "B"%>
+						<li><%= link_to "Products", product_items_path %> </li>
+					<%end%>
+					<li><%= link_to "Logout", destroy_user_session_path, :method=> :delete%></li>
+				</ul>
+				<%else%>
+				<ul>
+					<li class="active"><a href="login.html">Account</a></li> |
+					<li><a href="checkout.html">Wishlist</a></li> |
+					<li><a href="checkout.html">Checkout</a></li> |
+					<li><a href="/home/info_graphics_ecommerce">Ecommerce</a></li> |
+					<li><a href="/home/info_graphics_youtube">Youtube</a></li> |
+					<li><%=link_to "Log In", sign_in_path%></li> |
+					<li><%=link_to "Sign Up", new_user_registration_path%></li>
+				</ul>
+				<%end%>
