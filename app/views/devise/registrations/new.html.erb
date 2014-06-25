@@ -4,21 +4,21 @@
 		<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 			<%= devise_error_messages! %>
 			<div class="col_1_of_2 span_1_of_2">
-				<div><%= f.text_field :name,:value=>"Name",:onfocus=>"this.value = '';" ,:onblur=>"if (this.value == '') {this.value = 'Name';}"%></div>
-				<div><input type="text" name="user[email]" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-Mail';}"></div>
+				<div><input type="text" name="user[name]" placeholder="Name"></div>
+				<div><input type="text" name="user[email]" placeholder="Email"></div>
 				<%if params[:retailer]%>
 					<%= f.hidden_field :role_type, value: "RETAILER" %>
 					<%= f.hidden_field :retailer_approval, value: false %>
-					<div><input type="text" rows="4" cols="50" name="user[desc]" value="Description" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Description';}"></div>
-					<div><input type="text" name="retailer[contact_no]" value="Contact No" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Contact No';}"></div>
-					<div><input type="text" name="retailer[gender]" value="Gender" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Gender';}"></div>
+					<div><input type="text" rows="4" cols="50" name="user[desc]" placeholder="Description"></div>
+					<div><input type="text" name="retailer[contact_no]" placeholder="Contact No"></div>
+					<div><input type="text" name="retailer[gender]" placeholder="Gender"></div>
 					<% @password = (0..10).map { ('A'..'Z').to_a[rand(26)] }.join%>
 					<%=f.hidden_field :password, :value=>@password%>
 					<%=f.hidden_field :password_confirmation, :value=>@password%>
 				<% else %>
 					<%= f.hidden_field :role_type, :value=>"CUSTOMER" %>	
-					<div><input type="text" name="user[password]" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}"></div>	
-					<div><input type="text" name="user[password_confirmation]" value="Password Confirmation" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password confirmation';}"></div>
+					<div><input type="text" name="user[password]" placeholder="Password"></div>	
+					<div><input type="text" name="user[password_confirmation]" placeholder="Password Confirmation"></div>
 					<div>
 				<% end %>
 				<%= f.button "Sign up", :class=>"grey" %>
