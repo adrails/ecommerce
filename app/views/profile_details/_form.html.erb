@@ -1,88 +1,45 @@
-<div class="register_account">
-	<div class="wrap">
-		<h4 class="title">Your Profile Details</h4>
-<%= form_for @profile_detail, :html => { :class => 'form-horizontal', :multipart => true  } do |f| %>
-			<div class="col_1_of_2 span_1_of_2">
-			<div>
-				<%if @profile_detail.avatar.nil?%>
-					<%= f.file_field :avatar %>
-				<%else%>
-					<%= image_tag @profile_detail.avatar.url(:thumb) %>
-					<%= f.file_field :avatar %>
-				<%end%>
-			</div>
-				<div><%= f.text_field :name,:value=>"contact_no",:onfocus=>"this.value = '';" ,:onblur=>"if (this.value == '') {this.value = 'Name';}"%></div>
-				<div><%= f.text_field :dob, :placeholder=>"dob"%></div>
-				<%= f.hidden_field :doj, :value => Time.now %>
-				<div><input type="text" name="user[email]" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-Mail';}"></div>
-				
-				<%= f.button "Create a Profile", :class=>"grey" %>
-				<p class="terms">By clicking 'Create Account' you agree to the <a href="#">Terms &amp; Conditions</a>.</p>
+ <div class="login">
+          	<div class="wrap">
+				<div class="col_1_of_profile span_1_of_login">
+				<div class="login-title">
+	           		<h4 class="title">Profile Details</h4>
+					<div id="loginbox" class="loginbox">
+					<%= form_for @profile_detail, :html => { :class => 'form-horizontal', :multipart => true  } do |f| %>
+						<!--form action="" method="post" name="login" id="login-form"-->
+						  <fieldset class="input">
+							<p id="login-form-username">
+						      <label for="modlgn_username">Picture</label>
+								<%if @profile_detail.avatar.nil?%>
+									<%= f.file_field :avatar %>
+								<%else%>
+									<%= image_tag @profile_detail.avatar.url(:thumb) %>
+									<%= f.file_field :avatar %>
+								<%end%>
+						     </p>
+						    <p id="login-form-username">
+						      <label for="modlgn_username">Contact Number</label>
+									  <%= f.text_field :contact_no, autofocus: true, :class=>"inputbox" %>
+						      </p>
+							<p id="login-form-password">
+						      <label for="modlgn_passwd">Gender</label>
+								<%= f.text_field :gender, autocomplete: "off", :class=>"inputbox"%></div>
+						    </p>
+						    <p id="login-form-password">
+						      <label for="modlgn_passwd">DOB</label>
+								<%= f.text_field :dob, autocomplete: "off", :class=>"inputbox"%></div>
+						    </p>
+								<%= f.hidden_field :doj, :value => Time.now %>
+						    <div class="remember">
+								<div><%= f.button "Save", :class=>"grey" %></div>
+							 </div>
+						  </fieldset>
+						<% end %>
+					</div>
+			    </div>
 				</div>
+				<div class="clear"></div>
 			</div>
-			<%= link_to "Send Request for a Retailer",new_user_registration_path(:retailer=>"Retailer"), :class=>"grey"%>
-			<div class="clear"></div>
-		<% end %>
-	</div>
-</div>
-    
-		
+		</div>
 
-<%= form_for @profile_detail, :html => { :class => 'form-horizontal', :multipart => true  } do |f| %>
-  <div class="control-group">
-    <%= f.label :profile_picture, :class => 'control-label' %>
-    <div class="controls">
-		<%if @profile_detail.avatar.nil?%>
-			<%= f.file_field :avatar %>
-		<%else%>
-			<%= image_tag @profile_detail.avatar.url(:thumb) %>
-			<%= f.file_field :avatar %>
-		<%end%>
-    </div>
-  </div>
-	
-	<div class="control-group">
-    <%= f.label :contact_no, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :contact_no, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :gender, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :gender, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :dob, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :dob, :class => 'text_field' %>
-    </div>
-  </div>
-
-	<%= f.hidden_field :doj, :value => Time.now %>
-	<!--
-	<%= f.fields_for :addresses do |builder| %>
-		<%= render "address_fields", :f => builder %>
-	<% end %>-->
-
-
-	
-  <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <!--%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                profile_details_path, :class => 'btn' %-->
-  </div>
-<% end %>
-	<%if params[:action]=="edit"%>
-		<%if @profile_detail.addresses.present?%>
-			<%= render :partial => 'profile_addresses' %>
-		<% end %>
-	<% end %>
-<div class="form-actions">
-	<%if params[:action]=="edit"%>
-		<%=link_to "Add Address", new_address_path,:class=> "btn btn-primary", :style=>"color:white;"%>
-	<% end %>
-</div>
 	
 

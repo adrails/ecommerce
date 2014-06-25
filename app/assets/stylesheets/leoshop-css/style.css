@@ -938,6 +938,11 @@ ul.f-list1 li a:hover {
 	margin: 1% 0 1% 4.6%;
 	background:#f7f7f7;
 }
+.col_1_of_profile {
+	display: block;
+	float: left;
+	margin: 1% 0 1% 4.6%;
+}
 .span_1_of_login p{
 	color:#777;
 	font-size:0.85em;
@@ -1037,7 +1042,7 @@ table {
 	padding: 8px;
 	outline: none;
 	margin:10px 0;
-	width:91%;
+	width:100%;
 	font-family: 'Exo 2', sans-serif;
 	border:none;
 	box-shadow:0 0 2px #aaa;
