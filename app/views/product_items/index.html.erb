@@ -2,7 +2,7 @@
 	<div class="wrap">
 		<div class="section group">
 			<div class="cont span_2_of_3">
-				<h2 class="head">Featured Products</h2>
+				<h2 class="head">Your Products</h2>
 				<div class="top-box">
 					<% @product_items.each do |product_item| %>
 						<div class="col_1_of_3 span_1_of_3"> 
@@ -13,7 +13,7 @@
 											<%= link_to "#{image_tag product_item.pictures.first.image.url(:medium)}".html_safe, product_item_path(product_item)%>
 										<% end %>
 									</div>
-									<div class="sale-box"><span class="on_sale title_shop">New</span></div>	
+									<div class="sale-box"><span class="on_sale title_shop"><%= product_item.created_at.strftime("%dth %b %y")%></span></div>	
 									<div class="price">
 										<div class="cart-left">
 											<p class="title"><%= product_item.title %></p>
@@ -21,7 +21,7 @@
 												<span class="actual">Rs.<%= product_item.price %></span>
 											</div>
 										</div>
-										<div class="cart-right"> </div>
+										<div class="cart-right"></div>
 										<div class="clear"></div>
 									</div>				
 								</div>
