@@ -1,67 +1,206 @@
-<%- model_class = ProductItem -%>
-<div class="page-header">
-  <h1>Products</h1>
-</div>
+<div class="main">
+<div class="wrap">
 <% if !@product_items.present? %>
-	Sorry!! No Products Found
+0 results found for <%= params[:key]%>
 <% else %>
-	<% @product_items.each do |product_item| %>
-	<div class="divOuter">
-		<div class="divInner1"> 
-			<% if product_item.pictures.present?%>
-				<%= link_to "#{image_tag product_item.pictures.first.image.url(:medium)}".html_safe, product_item_path(product_item)%>
-			<% end %>
-		</div>
-		<div class="divInner2">
-			Item ID <%= link_to product_item.id, product_item_path(product_item) %><br>
-			Title <%= product_item.title %><br>
-			Available Quality <%= product_item.available_quantity %><br>
-			Description <%= product_item.description %><br>
-			Price <%= product_item.price %><br>
-			Active <%= product_item.is_active %><br>		
-			<%if product_item.user_id == current_user.id %>
-				<%= link_to t('.edit', :default => t("helpers.links.edit")),edit_product_item_path(product_item), :class => 'btn btn-mini' %>
-				<%= link_to t('.destroy', :default => t("helpers.links.destroy")),product_item_path(product_item),:method => :delete,:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },:class => 'btn btn-mini btn-danger' %>
-			<% end %>
-		</div>
-	</div>
-	<% end %>
-<% end %>	
-<%= link_to t('.new', :default => "Create"),new_product_item_path,:class => 'btn btn-primary', :style=>"color:white;" %>
+<div class="section group">
+<div class="cont span_2_of_3">
+<h2 class="head">Featured Products</h2>
+<div class="top-box">
+<% @product_items.each do |product_item| %>
+<div class="col_1_of_3 span_1_of_3"> 
+<a href="single.html">
+<div class="inner_content clearfix">
+<div class="product_image">
+<% if product_item.pictures.present?%>
+<%= link_to "#{image_tag product_item.pictures.first.image.url(:medium)}".html_safe, product_item_path(product_item)%>
+<% end %>
+</div>
+<div class="sale-box"><span class="on_sale title_shop">New</span></div>	
+<div class="price">
+<div class="cart-left">
+<p class="title"><%= product_item.title %></p>
+<div class="price1">
+<span class="actual">Rs.<%= product_item.price %></span>
+</div>
+</div>
+<div class="cart-right"> </div>
+<div class="clear"></div>
+</div>				
+</div>
+</a>
+</div>
+<% end %>
+<% end %>
+<div class="clear"></div>
+</div>	
+<h2 class="head">Staff Pick</h2>
+<div class="top-box1">
+<div class="col_1_of_3 span_1_of_3">
+<a href="single.html">
+<div class="inner_content clearfix">
+<div class="product_image">
+<img src="/assets/leoshop-images/pic8.jpg" alt=""/>
+</div>
+<div class="sale-box"><span class="on_sale title_shop">New</span></div>	
+<div class="price">
+<div class="cart-left">
+<p class="title">Lorem Ipsum simply</p>
+<div class="price1">
+<span class="actual">$12.00</span>
+</div>
+</div>
+<div class="cart-right"> </div>
+<div class="clear"></div>
+</div>				
+</div>
+</a>
+</div>
+<div class="col_1_of_3 span_1_of_3">
+<a href="single.html">
+<div class="inner_content clearfix">
+<div class="product_image">
+<img src="/assets/leoshop-images/pic4.jpg" alt=""/>
+</div>
+<div class="price">
+<div class="cart-left">
+<p class="title">Lorem Ipsum simply</p>
+<div class="price1">
+<span class="actual">$12.00</span>
+</div>
+</div>
+<div class="cart-right"> </div>
+<div class="clear"></div>
+</div>				
+</div>
+</a>
+</div>
+<div class="col_1_of_3 span_1_of_3">
+<a href="single.html">
+<div class="inner_content clearfix">
+<div class="product_image">
+<img src="/assets/leoshop-images/pic2.jpg" alt=""/>
+</div>
+<div class="sale-box"><span class="on_sale title_shop">New</span></div>	
+<div class="price">
+<div class="cart-left">
+<p class="title">Lorem Ipsum simply</p>
+<div class="price1">
+<span class="actual">$12.00</span>
+</div>
+</div>
+<div class="cart-right"> </div>
+<div class="clear"></div>
+</div>				
+</div>
+</a>
+</div>
+<div class="clear"></div>
+</div>	
+<h2 class="head">New Products</h2>	
+<div class="section group">
+<div class="col_1_of_3 span_1_of_3">
+<a href="single.html">
+<div class="inner_content clearfix">
+<div class="product_image">
+<img src="/assets/leoshop-images/pic5.jpg" alt=""/>
+</div>
+<div class="sale-box"><span class="on_sale title_shop">New</span></div>	
+<div class="price">
+<div class="cart-left">
+<p class="title">Lorem Ipsum simply</p>
+<div class="price1">
+<span class="actual">$12.00</span>
+</div>
+</div>
+<div class="cart-right"> </div>
+<div class="clear"></div>
+</div>				
+</div>
+</a>
+</div>
+<div class="col_1_of_3 span_1_of_3">
+<a href="single.html">
+<div class="inner_content clearfix">
+<div class="product_image">
+<img src="/assets/leoshop-images/pic2.jpg" alt=""/>
+</div>
+<div class="sale-box"><span class="on_sale title_shop">New</span></div>	
+<div class="price">
+<div class="cart-left">
+<p class="title">Lorem Ipsum simply</p>
+<div class="price1">
+<span class="actual">$12.00</span>
+</div>
+</div>
+<div class="cart-right"> </div>
+<div class="clear"></div>
+</div>				
+</div>
+</a>
+</div>
+<div class="col_1_of_3 span_1_of_3">
+<a href="single.html">
+<div class="inner_content clearfix">
+<div class="product_image">
+<img src="/assets/leoshop-images/pic3.jpg" alt=""/>
+</div>
+<div class="sale-box"><span class="on_sale title_shop">New</span></div>	
+<div class="price">
+<div class="cart-left">
+<p class="title">Lorem Ipsum simply</p>
+<div class="price1">
+<span class="actual">$12.00</span>
+</div>
+</div>
+<div class="cart-right"> </div>
+<div class="clear"></div>
+</div>				
+</div>
+</a>
+</div>
+
+<div class="clear"></div>
+</div>			 						 			    
+</div>
+<div class="rsidebar span_1_of_left">
+<div class="top-border"> </div>
+<div class="border">
+<link href="leoshop-css/default.css" rel="stylesheet" type="text/css" media="all" />
+<link href="leoshop-css/nivo-slider.css" rel="stylesheet" type="text/css" media="all" />
+<script src="leoshop-js/jquery.nivo.slider.js"></script>
+<script type="text/javascript">
+$(window).load(function() {
+$('#slider').nivoSlider();
+});
+</script>
+<div class="slider-wrapper theme-default">
+<div id="slider" class="nivoSlider">
+<img src="/assets/leoshop-images/t-img1.jpg"  alt="" />
+<img src="/assets/leoshop-images/t-img2.jpg"  alt="" />
+<img src="/assets/leoshop-images/t-img3.jpg"  alt="" />
+</div>
+</div>
+<div class="btn"><a href="single.html">Check it Out</a></div>
+</div>
+<div class="top-border"> </div>
+<div class="sidebar-bottom">
+<h2 class="m_1">Newsletters<br> Signup</h2>
+<p class="m_text">Lorem ipsum dolor sit amet, consectetuer</p>
+<div class="subscribe">
+<form>
+<input name="userName" type="text" class="textbox">
+<input type="submit" value="Subscribe">
+</form>
+</div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
 
 
-<%= will_paginate @product_items, renderer: BootstrapPagination::Rails %>
-	<!--table class="table table-striped">
-		<thead>
-			<tr>
-				<th><%= model_class.human_attribute_name(:id) %></th>
-				<th><%= model_class.human_attribute_name(:title) %></th>
-				<th><%= model_class.human_attribute_name(:available_quantity) %></th>
-				<th><%= model_class.human_attribute_name(:description) %></th>
-				<th><%= model_class.human_attribute_name(:price) %></th>
-				<th><%= model_class.human_attribute_name(:is_active) %></th>
-				<th><%=t '.actions', :default => t("helpers.actions") %></th>
-			</tr>
-		</thead>
-		<tbody>
-			<% @product_items.each do |product_item| %>
-				<tr>
-					<td><%= link_to product_item.id, product_item_path(product_item) %></td>
-					<td><%= product_item.title %></td>
-					<td><%= product_item.available_quantity %></td>
-					<td><%= product_item.description %></td>
-					<td><%= product_item.price %></td>
-					<td><%= product_item.is_active %></td>
-					<td>
-				<%if product_item.user_id == current_user.id %>
-					<%= link_to t('.edit', :default => t("helpers.links.edit")),edit_product_item_path(product_item), :class => 'btn btn-mini' %>
-					<%= link_to t('.destroy', :default => t("helpers.links.destroy")),product_item_path(product_item),:method => :delete,:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },:class => 'btn btn-mini btn-danger' %>
-				<% end %>
-					</td>
-				</tr>
-			<% end %>
-		</tbody>
-	</table-->
 
 
 
