@@ -3,7 +3,9 @@
   <h1>Products</h1>
 </div>
 <% if !@cart.product_item_ids.present? %>
-	Sorry!! No Products Found
+   <h4 class="title">Shopping cart is empty</h4>
+    	     <p class="cart">You have no items in your shopping cart.<br>
+			Click<a href="/home/index"> here</a> to continue shopping</p>
 <% else %>
 	<% @cart.product_item_ids.each do |product_item| %>
 	<div class="divOuter">
@@ -30,10 +32,4 @@
 	<% end %>
 	<%=link_to(image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), orders_billing_info_path)%>
 <% end %>
-
-
-
-
-
-
-
+   

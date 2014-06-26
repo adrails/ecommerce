@@ -59,12 +59,19 @@
 				<div class="desc1 span_3_of_2">
 					<h3 class="m_3"><%=@product_item.title%></h3>
 					<p class="m_5">Rs. <%=@product_item.price%> <!--span class="reducedfrom">Rs. 999</span> <a href="#">click for offer</a></p-->
+
+					<%if current_user && User.find_role?(current_user) == 'C'%>
+					<span>
+					<%= link_to t('.new', :default => "Add to Mycart"),my_cart_carts_path(:user_id=>current_user.id, :product_item_ids=>@product_item.id),:class => 'btn btn-primary', :style=>"color:white;" %> 
+					</span>
+					<%else%>
 					<div class="btn_form">
-						<form>
-							<input type="submit" value="buy" title="">
+						<form action="/users/sign_in">
+						<%session[:return_to] = request.url%>
+						<input type="submit" value="buy" title="">
 						</form>
 					</div>
-					<span class="m_link"><a href="#">login to save in wishlist</a> </span>
+					<%end%>
 					<p class="m_text2"><%=@product_item.description%></p>
 				</div>
 				<div class="clear"></div>	

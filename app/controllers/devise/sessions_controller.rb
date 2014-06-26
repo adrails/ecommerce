@@ -16,7 +16,12 @@ class Devise::SessionsController < DeviseController
     set_flash_message(:notice, :signed_in) if is_flashing_format?
     sign_in(resource_name, resource)
     yield resource if block_given?
-    respond_with resource, location: after_sign_in_path_for(resource)
+		if !session[:return_to].blank?
+      redirect_to session[:return_to]
+      session[:return_to] = nil
+    else
+      respond_with resource, :location => after_sign_in_path_for(resource)
+    end
   end
 
   # DELETE /resource/sign_out
