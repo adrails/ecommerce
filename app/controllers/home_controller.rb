@@ -11,4 +11,8 @@ class HomeController < ApplicationController
 		@product_items = ProductItem.search_by_keyword(params[:key]).paginate(:page => params[:page], :per_page => 4)
 	end
 	
+	def index
+		@product_items = ProductItem.all
+	end
+	
 end
