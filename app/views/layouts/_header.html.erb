@@ -82,10 +82,10 @@
 			<div class="menu">
 						<ul class="megamenu skyblue">
 		<li class="active grid"><a href="/product_items">Home</a></li>
-		<% if User.find_role?(current_user) == "B"%>
+		<% if current_user && User.find_role?(current_user) == "B"%>
 			<li><%= link_to "Products", product_items_path, :class => "color4" %> 
-			<li><a class="color6" href="other.html">Approve order</a></li>
-			<li><a class="color6" href="other.html">Order History</a></li>
+			<li><a class="color6" href="other.html">Approve</a></li>
+			<li><a class="color6" href="other.html">History</a></li>
 		<%end%>
 		</ul>
 		</div>
