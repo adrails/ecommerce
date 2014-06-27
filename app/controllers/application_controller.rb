@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 	before_filter :update_sanitized_params, if: :devise_controller?
-	before_filter :create_cart
 	
 	rescue_from ActiveRecord::RecordNotFound, :with => :not_found
 	rescue_from ActionController::RoutingError, :with => :rescue_404
@@ -28,10 +27,6 @@ class ApplicationController < ActionController::Base
 
 	def update_sanitized_params
 		devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:name, :role_type,:email,:password)}
-	end
-	
-	def self.create_cart
-		self.cart.create
 	end
 	
 end
