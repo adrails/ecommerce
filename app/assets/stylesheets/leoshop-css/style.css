@@ -479,7 +479,7 @@ p.title a:hover{
 }
 .cart-right {
 	float: right;
-	background: url(/assets/leoshop-images/edit.png)2px 0px #7db122;
+	background: url(/assets/leoshop-images/cart3.png)2px 0px #7db122;
 	border-radius: 100px;
 	-webkit-border-radius: 100px;
 	-moz-border-radius: 100px;
@@ -490,6 +490,26 @@ p.title a:hover{
 	cursor:pointer;
 }
 .span_1_of_3:hover .cart-right{
+	float: right;
+	background: url(/assets/leoshop-images/cart3.png)2px 0px #000;
+	border-radius: 100px;
+	width: 40px;
+	height: 40px;
+	text-align: center;
+}
+.cart-rt {
+	float: right;
+	background: url(/assets/leoshop-images/edit.png)2px 0px #7db122;
+	border-radius: 100px;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	-o-border-radius: 100px;
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	cursor:pointer;
+}
+.span_1_of_3:hover .cart-rt{
 	float: right;
 	background: url(/assets/leoshop-images/edit.png)2px 0px #000;
 	border-radius: 100px;
