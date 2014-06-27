@@ -19,7 +19,7 @@
 											<%= link_to "#{image_tag product_item.pictures.first.image.url(:medium)}".html_safe, product_item_path(product_item)%>
 										<% end %>
 									</div>
-									<div class="sale-box"><span class="on_sale title_shop"><%= product_item.created_at.strftime("%dth %b %y")%></span></div>	
+									<div class="sale-box"><%=link_to image_tag("/assets/leoshop-images/delete.png"),product_item, method: :delete, data: { confirm: 'Are you sure?' }%></div>	
 									<div class="price">
 										<div class="cart-left">
 											<p class="title"><%= product_item.title %></p>
