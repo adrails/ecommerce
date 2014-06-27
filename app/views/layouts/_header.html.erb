@@ -109,10 +109,20 @@
 	</div>
 	 <div class="header-bottom-right">
 	 <div class="search">
-	 <form action="/home/search">
+		
+	 <% if current_user && User.find_role?(current_user) == "B"%>
+	 <form action="/home/search">	
 		<input type="text" class="textbox" name="key" placeholder="search here">
-		<input type="submit" id="submit">
-	</form>
+		<input type="hidden" name="cont" value="<%=params[:controller]%>">
+			 <input type="submit" id="submit">
+	 </form>
+	<% else %>
+	 <form action="/home/search">	
+		<input type="text" class="textbox" name="key" placeholder="search here">
+			 <input type="submit" id="submit">
+	 </form>
+	 <% end %>
+
 	</div>
 	<div class="tag-list">
 		<%if current_user && User.find_role?(current_user) == "C"%>

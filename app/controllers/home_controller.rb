@@ -9,10 +9,14 @@ class HomeController < ApplicationController
 	
 	def search
 		if current_user && User.find_role?(current_user) == "B"
-			@product_items = ProductItem.search_by_product(params[:key],current_user.id).paginate(:page => params[:page], :per_page => 4)
+			if params[:cont] == "product_items"
+				@product_items = ProductItem.search_by_product(params[:key],current_user.id).paginate(:page => params[:page], :per_page => 4)
+			else
+				@product_items = ProductItem.search_by_keyword(params[:key]).paginate(:page => params[:page], :per_page => 4)
+			end
 		else
 			@product_items = ProductItem.search_by_keyword(params[:key]).paginate(:page => params[:page], :per_page => 4)
-		end 
+		end
 	end
 	
 	def index
