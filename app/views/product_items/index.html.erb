@@ -3,7 +3,7 @@
 		<div class="section group">
 			<div class="cont span_2_of_3">
 				<%if current_user && (User.find_role?(current_user) == "A" || User.find_role?(current_user) == "B")%>
-					<%= link_to 'Create New', new_product_item_path, :class => 'btn btn-primary' %>
+					<%= link_to 'Create New', new_product_item_path, :class=>"btn" %>
 				<% end %>
 				<% if  @product_items.empty?%>
 					<h2 class="head">No Products</h2>
