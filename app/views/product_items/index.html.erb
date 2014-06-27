@@ -2,7 +2,13 @@
 	<div class="wrap">
 		<div class="section group">
 			<div class="cont span_2_of_3">
-				<h2 class="head">Your Products</h2>
+				<%if current_user && (User.find_role?(current_user) == "A" || User.find_role?(current_user) == "B")%>
+					<%= link_to 'Create New', new_product_item_path, :class => 'btn btn-primary' %>
+				<% end %>
+				<% if  @product_items.empty?%>
+					<h2 class="head">No Products</h2>
+				<%else%>
+				<h2 class="head">Products</h2>
 				<div class="top-box">
 					<% @product_items.each do |product_item| %>
 						<div class="col_1_of_3 span_1_of_3"> 
@@ -21,13 +27,14 @@
 												<span class="actual">Rs.<%= product_item.price %></span>
 											</div>
 										</div>
-										<div class="cart-right"></div>
+										<a href="/product_items/<%=product_item.id%>/edit"><div class="cart-right"></div></a>
 										<div class="clear"></div>
 									</div>				
 								</div>
 							</a>
 						</div>
 					<% end %>
+				<% end %>
 					<div class="clear"></div>
 				</div>
 			</div>
