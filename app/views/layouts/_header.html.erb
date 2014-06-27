@@ -2,7 +2,7 @@
 	<div class="wrap"> 
 		<div class="header-top-left">
 			<% if user_signed_in? %>
-			<%=current_user.name%>
+			<P> Logged in as :<%=current_user.role_type%> | <%=current_user.name%> </p>
 			<% end %>
 			<!--div class="box">
 			<select tabindex="4" class="dropdown">
