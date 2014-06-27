@@ -6,4 +6,8 @@ class ProductItem < ActiveRecord::Base
 	def self.search_by_keyword(keyword)
 		return where("title like ?","%#{keyword}%")
 	end
+	
+	def self.search_by_product(keyword, id)
+		return User.find(id).product_items.where("title like ?","%#{keyword}%")
+	end
 end

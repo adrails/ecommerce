@@ -53,13 +53,15 @@
 								<li><a href="/admins/assign">Assign</a></li>
 							</ul-->
 						</li> |
-					<%end%>
-					<% if User.find_role?(current_user) == "C"%>
+					<% elsif User.find_role?(current_user) == "C"%>
 						<%if current_user.cart.product_item_ids && current_user.cart.product_item_ids%>
 							<li><%= link_to "My Cart (#{current_user.cart.product_item_ids.count})", carts_path %> </li> |
 						<%else%>
 							<li><%= link_to "My Cart", carts_path %> </li> |
 						<% end %>
+					<% elsif User.find_role?(current_user) == "B"%>	
+						<li><%= link_to "Manage Products", product_items_path %> </li> |
+						<li><%= link_to "Shop", "/home/index" %> </li> |
 					<%end%>
 					<li><%= link_to "Logout", destroy_user_session_path, :method=> :delete%></li> |
 				<% else %>
@@ -83,9 +85,11 @@
 						<ul class="megamenu skyblue">
 		<li class="active grid"><a href="/product_items">Home</a></li>
 		<% if current_user && User.find_role?(current_user) == "B"%>
-			<li><%= link_to "Products", product_items_path, :class => "color4" %> 
-			<li><a class="color6" href="other.html">Approve</a></li>
-			<li><a class="color6" href="other.html">History</a></li>
+			<%if params[:controller] == "product_items" && params[:action] == "index"%>
+				<li><%= link_to "Products", product_items_path, :class => "color4" %> 
+				<li><a class="color6" href="other.html">Approve</a></li>
+				<li><a class="color6" href="other.html">History</a></li>
+			<% end %>
 		<%end%>
 		</ul>
 		</div>
