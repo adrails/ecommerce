@@ -17,8 +17,13 @@ class Devise::SessionsController < DeviseController
     sign_in(resource_name, resource)
     yield resource if block_given?
 		if !session[:return_to].blank?
-      redirect_to session[:return_to]
-      session[:return_to] = nil
+			if User.find_role?(current_user) == 'C'
+				redirect_to session[:return_to]
+				session[:return_to] = nil
+			else
+				redirect_to root_path
+				session[:return_to] = nil
+			end
     else
       respond_with resource, :location => after_sign_in_path_for(resource)
     end
