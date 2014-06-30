@@ -73,7 +73,12 @@ class CartsController < ApplicationController
 		end
 		respond_to do |format|
       if @cart.save
-        format.html { redirect_to carts_path, notice: 'Cart was successfully updated.' }
+				if ([@new_product_id]-@products_ids).empty?
+					flash[:notice] = "Already present in your Cart!!"
+				else
+					flash[:notice] = "Cart was successfully updated."
+				end
+        format.html { redirect_to carts_path}
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
