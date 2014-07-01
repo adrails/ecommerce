@@ -125,7 +125,7 @@
 
 	</div>
 	<div class="tag-list">
-		<%if current_user && User.find_role?(current_user) == "C"%>
+		
 		<ul class="icon1 sub-icon1 profile_img">
 		<li><a class="active-icon c1" href="#"> </a>
 			<ul class="sub-icon1 list">
@@ -134,26 +134,33 @@
 			</ul>
 		</li>
 	</ul>
-		<ul class="icon1 sub-icon1 profile_img">
-			<li><a class="active-icon c2" href="#"> </a>
-				<ul class="sub-icon1 list">
-					<li><h3>No Products</h3><a href=""></a></li>
-					<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
+		<%if (current_user && User.find_role?(current_user) == "C" ) && current_user.cart.product_item_ids %>
+			<ul class="icon1 sub-icon1 profile_img">
+				<li><a class="active-icon c2" href="#"> </a>
+										<ul class="sub-icon1 list">
+					<% current_user.cart.product_item_ids.each do |product_item| %>
+					<% product_item = find_product_item(product_item)%>
+
+							<li><a href="/carts"><h3><%=product_item.title%></h3></a></li>
+							<li><p><%=product_item.price%><a href="">adipiscing elit, sed diam</a></p></li>
+					
+				<%end%>
 				</ul>
-								<ul class="sub-icon1 list">
-					<li><h3>No Products</h3><a href=""></a></li>
-					<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
+				</li>
+			</ul>
+			<ul class="last"><li><%= link_to "My Cart (#{current_user.cart.product_item_ids.count})", carts_path %> </li></ul>
+			<%else%>
+				<ul class="icon1 sub-icon1 profile_img">
+					<li><a class="active-icon c2" href="#"> </a>
+						<ul class="sub-icon1 list">
+							<li><h3>No Products</h3><a href=""></a></li>
+							<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
+						</ul>
+					</li>
 				</ul>
-			</li>
-		</ul>
-			<%if User.find_role?(current_user) == "C"%>
-				<%if current_user.cart.product_item_ids && current_user.cart.product_item_ids%>
-					<ul class="last"><li><%= link_to "My Cart (#{current_user.cart.product_item_ids.count})", carts_path %> </li></ul>
-				<%else%>
-					<ul class="last"><li><%= link_to "My Cart (0)", carts_path %> </li></ul>
-				<% end %>
-			<%end%>
-		<%end%>
+				<ul class="last"><li><%= link_to "My Cart (0)", carts_path %> </li></ul>
+		<% end %>
+		
 	</div>
 	</div>
 	 <div class="clear"></div>

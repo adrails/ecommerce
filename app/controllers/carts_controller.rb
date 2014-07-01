@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
-
+	skip_before_filter :verify_authenticity_token, :only => [:get_quantity]
   # GET /carts
   # GET /carts.json
   def index
@@ -66,11 +66,24 @@ class CartsController < ApplicationController
 		@cart = Cart.find_by_user_id(params[:user_id])
 		@products_ids = @cart.product_item_ids
 		@new_product_id = params[:product_item_ids].to_i
+		if @cart.quantity.nil?
+			@cart.quantity = [{"product_id"=>@new_product_id, "quantity"=>1}]
+		else
+			@cart.quantity.append({"product_id"=>@new_product_id, "quantity"=>1})
+		end
+		
+		if @cart.total.nil?
+			@cart.total = ProductItem.find(@new_product_id).price
+		else
+			@cart.total = @cart.total+ProductItem.find(@new_product_id).price
+		end
+		
 		if @products_ids.nil?
 			@cart.product_item_ids = [@new_product_id]
 		else
 			@cart.product_item_ids = [@products_ids,@new_product_id].flatten.uniq
 		end
+		
 		respond_to do |format|
       if @cart.save
 				if ([@new_product_id]-@products_ids).empty?
@@ -90,10 +103,39 @@ class CartsController < ApplicationController
 	def remove_from_my_cart
 		@cart = Cart.find_by_user_id(current_user.id)
 		@cart.product_item_ids.delete(params[:product_id].to_i)
-		p @cart.product_item_ids
+		@rejected = @cart.quantity.reject{|h| params[:product_id].to_i == h["product_id"] }
+		@cart.quantity = @rejected
+		if !@cart.total.nil?
+			@cart.total = @cart.total-(ProductItem.find(params[:product_id].to_i).price)
+		end
 		respond_to do |format|
       if @cart.save
         format.html { redirect_to carts_path, notice: 'Cart was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @cart.errors, status: :unprocessable_entity }
+      end
+    end
+	end
+	
+	def get_quantity
+		@cart = Cart.find_by_user_id(current_user.id)
+		@cart.total = params[:total_price]
+		if @cart.quantity.nil?
+			@cart.quantity = [{"product"=>params[:product_id], "quantity"=>params[:quantity]}]
+		else
+			@cart.quantity && @cart.quantity.each do |f|
+				if f.values[0] == params[:product_id].to_i
+					f["quantity"] = params[:quantity]
+				end
+			end
+
+		end
+		
+		respond_to do |format|
+      if @cart.save
+        #~ format.html { redirect_to carts_path, notice: 'Cart was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
