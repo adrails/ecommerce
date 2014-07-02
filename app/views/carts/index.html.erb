@@ -1,9 +1,10 @@
-<div class="register_account">
-	<div class="wrap">
-		<% if !@cart.product_item_ids.present? %>
+<% if !@cart.product_item_ids.present? %>
+		<div class="wrap">
     	     <h4 class="title">Shopping cart is empty</h4>
     	     <p class="cart">You have no items in your shopping cart.<br>Click<a href="/home/index"> here</a> to continue shopping</p>
+					 </div>
 		<%else%>
+		<div class="wrap">
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -15,26 +16,68 @@
 					</tr>
 				</thead>
 				<tbody>
-					<% @cart.product_item_ids.each do |product_item| %>
+					<% @cart.product_item_ids.each_with_index do |product_item, index| %>
 					<tr>
 					<% product_item = find_product_item(product_item)%>
 						<% if product_item.pictures.present?%>
 						<td>	<%= link_to "#{image_tag product_item.pictures.first.image.url(:thumb)}".html_safe, product_item_path(product_item)%> </td>
 						<% end %>
-						
 						<td> <%= product_item.description %></td>
-						<td> <%= product_item.available_quantity %></td>
-						<td><%= product_item.price %></td>
-						
-						</tr>
+						<% @cart.quantity && @cart.quantity.each do |c|%>
+							<%if c["product_id"] == product_item.id%>
+								<% @quantity = c["quantity"];%>
+							<%end%>
+						<%end%>
+						<td><%=select_tag :available_quantity, options_for_select((1..product_item.available_quantity).to_a,@quantity), :id=>"quantity_#{index}",:style=>"width:50px;", :onchange=>"update_quantity_price(this,#{product_item.price},#{product_item.id});"%></td>
+						<%if @quantity == nil %>
+							<% @quantity=0 %>
+						<%end%>
+						<td id="price_<%= index%>"><%= (product_item.price.to_i*@quantity.to_i) %></td>
 							<%if product_item.user_id == current_user.id %>
-								<%= link_to t('.edit', :default => t("helpers.links.edit")),edit_product_item_path(product_item), :class => 'btn btn-mini' %>
-								<%= link_to t('.destroy', :default => t("helpers.links.destroy")),product_item_path(product_item),:method => :delete,:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },:class => 'btn btn-mini btn-danger' %>
+								<td><%= link_to t('.edit', :default => t("helpers.links.edit")),edit_product_item_path(product_item), :class => 'btn btn-mini' %>
+								<%= link_to t('.destroy', :default => t("helpers.links.destroy")),product_item_path(product_item),:method => :delete,:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },:class => 'btn btn-mini btn-danger' %></td>
 							<% end %>
 							<td><%= link_to t('.destroy', :default => "Remove"),remove_from_my_cart_carts_path(:product_id=>product_item.id),:method => :delete,:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },:class => 'btn btn-mini btn-danger' %></td>
+							</tr>
 					<% end %>
 				</tbody>
 			</table>
-		<%end%>
+
+		<div style="padding-left:827px;">
+		<b>Total:</b>
+		<p id="total_price">
+			<%= @cart.total%>
+			</p>
+		</div>
+		<div style="padding-left:1000px;">
+		<%= button_to "Place Order" %>
+				<%end%>
+		</div>
 	</div>
-</div>
+
+<script type="text/javascript">
+function update_quantity_price(data,price_org,product_id){
+	var quantity_row = $(data).val();
+	var total = $("#total_price").text();
+	var quantity_index = $(data).attr('id').split("_")[1];
+	var price = $("#price_"+quantity_index).text();
+	result=quantity_row*price_org; 
+	$("#price_"+quantity_index).text(result);
+	//~ alert((parseInt(total) + parseInt(result)) - parseInt(price));
+	$("#total_price").text((parseInt(total) + parseInt(result)) - parseInt(price));
+	var total_price = (parseInt(total) + parseInt(result)) - parseInt(price);
+	update_quantity(result,total_price,product_id,quantity_row);
+												
+}
+function update_quantity(result, total_price, product_id,quantity_row )
+{
+	jQuery.ajax({
+				url: "/carts/get_quantity/",
+				data: { product_id: product_id, total_price: total_price,  price_amount: result, quantity: quantity_row }
+		}).done(function(){
+						console.log("done");
+					});
+		console.log("inside update quantitysss");	
+}
+
+</script>

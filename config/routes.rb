@@ -4,6 +4,7 @@ ECommerce::Application.routes.draw do
 		collection do
 			get 'my_cart'
 			delete 'remove_from_my_cart'
+			get 'get_quantity'
 		end
 	end
 	
