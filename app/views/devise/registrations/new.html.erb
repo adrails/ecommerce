@@ -1,5 +1,7 @@
 <div class="register_account">
 	<div class="wrap">
+		<div>
+		</div>
 		<h4 class="title">Create an Account</h4>
 		<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 			<%= devise_error_messages! %>
@@ -24,27 +26,37 @@
 						<label for="modlgn_username">Contact No</label>
 						<input type="text" name="retailer[contact_no]" placeholder="Contact No">
 					</div>
-					<div><input type="text" name="retailer[gender]" placeholder="Gender"></div>
+					<div>
+						<label for="modlgn_username">Gender</label>
+						<input type="radio" name="retailer[gender]" value="male">Male</input>
+						<input type="radio" name="retailer[gender]" value="female">Female</input>
+					</div>
 					<% @password = (0..10).map { ('A'..'Z').to_a[rand(26)] }.join%>
 					<%=f.hidden_field :password, :value=>@password%>
 					<%=f.hidden_field :password_confirmation, :value=>@password%>
 				<% else %>
 					<%= f.hidden_field :role_type, :value=>"CUSTOMER" %>	
 					<div>
-					<input id="modlgn_passwd" type="password" name="user[password]" class="inputbox" size="18" autocomplete="off" placeholder="Password">
+						<label for="modlgn_username">Password</label>
+						<input id="modlgn_passwd" type="password" name="user[password]" class="inputbox" size="18" autocomplete="off" placeholder="Password">
 					</div>	
-					<div><input type="text" name="user[password_confirmation]" placeholder="Password Confirmation"></div>
+					<div>
+						<label for="modlgn_username">Password Confirmation</label>
+						<input type="text" name="user[password_confirmation]" placeholder="Password Confirmation">
+					</div>
 					<div>
 				<% end %>
-				<%= f.button "Sign up", :class=>"grey" %>
-				<p class="terms">By clicking 'Create Account' you agree to the <a href="#">Terms &amp; Conditions</a>.</p>
+				<div style="margin-top:25px;">
+					<%= f.button "Sign up", :class=>"grey" %>
+				</div>
+				<!--p class="terms">By clicking 'Sign up' you agree to the <a href="#">Terms &amp; Conditions</a>.</p-->
 				</div>
 			</div>
-			<%if !params[:retailer]%>
-				<%= link_to "Send Request for a Retailer",new_user_registration_path(:retailer=>"Retailer"), :class=>"grey"%>
-			<%end%>
-			<div class="clear"></div>
 		<% end %>
+		<div class="clear"></div>
+		<div class="back">
+			<a href="/home/index" style="color:red;">Cancel</a>
+		</div>
 	</div>
 </div>
     

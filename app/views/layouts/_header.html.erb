@@ -78,6 +78,7 @@
 			<div class="menu">
 						<ul class="megamenu skyblue">
 		<li class="active grid"><a href="/home/index">Home</a></li>
+		<li><%= link_to "Seller Signup",new_user_registration_path(:retailer=>"Retailer"), :class=>"grey"%></li>
 		<% if current_user && User.find_role?(current_user) == "B"%>
 			<%if params[:controller] == "product_items" && params[:action] == "index"%>
 				<li><%= link_to "Products", product_items_path, :class => "color4" %> 
