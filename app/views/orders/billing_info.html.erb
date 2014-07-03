@@ -1,10 +1,47 @@
-<form action="/orders/checkout" method="post">
-  First name: <input type="text" name="first_name"><br>
-  Last name: <input type="text" name="last_name"><br>
-  Card Number: <input type="text" name="number"><br>
-  Card Type: <input type="text" name="card_type"><br>
-  Expiry Month: <input type="text" name="month"><br>
-  Expiry Year: <input type="text" name="year"><br>
-  CVV: <input type="text" name="verification_value"><br>
-  <input type="submit" value="Submit">
-</form>
+<div class="wrap">
+		<div class="col_1_of_login span_1_of_login">
+		<div class="login-title">
+			<h4 class="title">Payment Details</h4>
+			<div id="loginbox" class="loginbox">
+			<%= form_tag(orders_checkout_path, :method=>'post', :multipart => true) do %>
+				<fieldset class="input">
+						<p id="login-form-username">
+							<label for="modlgn_username">First name</label>
+							<input type="text" name="first_name" class="inputbox">
+							<input type="hidden" name="cart_id" value="<%= @cart_id%>">
+							<input type="hidden" name="address_id" value="<%= @address_id%>">
+							</p>
+						<p id="login-form-password">
+							<label for="modlgn_passwd">Last name</label>
+						<input type="text" name="last_name" class="inputbox">
+						</p>
+						<p id="login-form-password">
+							<label for="modlgn_passwd">Card Number</label>
+						<input type="text" name="number" class="inputbox">
+						</p>
+						<p id="login-form-password">
+							<label for="modlgn_passwd">Card type</label>
+						<input type="text" name="card_type" class="inputbox">
+						</p>
+						<p id="login-form-password">
+							<label for="modlgn_passwd">  Expiry Month</label>
+						<input type="text" name="month" class="inputbox">
+						</p>
+						<p id="login-form-password">
+							<label for="modlgn_passwd">  Expiry Year</label>
+						<input type="text" name="year" class="inputbox">
+						</p>
+						<p id="login-form-password">
+							<label for="modlgn_passwd">  CVV</label>
+						<input type="text" name="cvv" class="inputbox">
+						</p>
+						<div class="remember">
+							<div><%= submit_tag "Make payment", :class=>"grey" %></div>
+					 </div>
+					</fieldset>
+				<% end %>
+			</div>
+			</div>
+		</div>
+	<div class="clear"></div>
+		</div>

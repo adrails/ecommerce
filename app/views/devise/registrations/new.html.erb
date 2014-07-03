@@ -4,20 +4,35 @@
 		<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 			<%= devise_error_messages! %>
 			<div class="col_1_of_2 span_1_of_2">
-				<div><input type="text" name="user[name]" placeholder="Name"></div>
-				<div><input type="text" name="user[email]" placeholder="Email"></div>
+				<div>
+					<label for="modlgn_username">Name</label>
+					<input type="text" name="user[name]" placeholder="Name">
+				</div>
+				<div>
+					<label for="modlgn_username">Email</label>
+					<input type="text" name="user[email]" placeholder="Email">
+				</div>
 				<%if params[:retailer]%>
 					<%= f.hidden_field :role_type, value: "RETAILER" %>
 					<%= f.hidden_field :retailer_approval, value: false %>
-					<div><input type="text" rows="4" cols="50" name="user[desc]" placeholder="Description"></div>
-					<div><input type="text" name="retailer[contact_no]" placeholder="Contact No"></div>
+					<div>
+						<label for="modlgn_username">Description</label>
+						<%= f.text_area :desc, :rows=>4, :cols=>50, :placeholder => "Your Text here....", :style=>"width:627px;" %>
+						<!--input type="textarea" rows="4" cols="50" name="user[desc]" placeholder="Description"-->
+					</div>
+					<div>
+						<label for="modlgn_username">Contact No</label>
+						<input type="text" name="retailer[contact_no]" placeholder="Contact No">
+					</div>
 					<div><input type="text" name="retailer[gender]" placeholder="Gender"></div>
 					<% @password = (0..10).map { ('A'..'Z').to_a[rand(26)] }.join%>
 					<%=f.hidden_field :password, :value=>@password%>
 					<%=f.hidden_field :password_confirmation, :value=>@password%>
 				<% else %>
 					<%= f.hidden_field :role_type, :value=>"CUSTOMER" %>	
-					<div><input type="text" name="user[password]" placeholder="Password"></div>	
+					<div>
+					<input id="modlgn_passwd" type="password" name="user[password]" class="inputbox" size="18" autocomplete="off" placeholder="Password">
+					</div>	
 					<div><input type="text" name="user[password_confirmation]" placeholder="Password Confirmation"></div>
 					<div>
 				<% end %>
@@ -25,7 +40,9 @@
 				<p class="terms">By clicking 'Create Account' you agree to the <a href="#">Terms &amp; Conditions</a>.</p>
 				</div>
 			</div>
-			<%= link_to "Send Request for a Retailer",new_user_registration_path(:retailer=>"Retailer"), :class=>"grey"%>
+			<%if !params[:retailer]%>
+				<%= link_to "Send Request for a Retailer",new_user_registration_path(:retailer=>"Retailer"), :class=>"grey"%>
+			<%end%>
 			<div class="clear"></div>
 		<% end %>
 	</div>

@@ -48,11 +48,14 @@ ECommerce::Application.routes.draw do
   get 'home/info_graphics_ecommerce' => 'home#info_graphics_ecommerce'
   get 'home/info_graphics_youtube' => 'home#info_graphics_youtube'
   get 'orders/billing_info' => 'orders#billing_info'
-	resources :orders do
-		collection do
-			post 'checkout'
-		end
-	end
+  get 'orders/place_order_details' => 'orders#place_order_details'
+  post 'orders/checkout' => 'orders#checkout'
+	#~ resources :orders do
+		#~ collection do
+			#~ post 'checkout'
+			#~ post 'place_order_details'
+		#~ end
+	#~ end
   get 'home/search' => 'home#search'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

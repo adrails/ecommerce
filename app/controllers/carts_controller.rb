@@ -107,6 +107,8 @@ class CartsController < ApplicationController
 		@cart.quantity = @rejected
 		if !@cart.total.nil?
 			@cart.total = @cart.total-(ProductItem.find(params[:product_id].to_i).price)
+		else
+			@cart.total = nil
 		end
 		respond_to do |format|
       if @cart.save

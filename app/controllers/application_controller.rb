@@ -29,4 +29,10 @@ class ApplicationController < ActionController::Base
 		devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:name, :role_type,:email,:password)}
 	end
 	
+	# Here checked user session
+  def check_login
+		flash[:notice] = "Need to Login"
+    redirect_to root_path 
+  end
+	
 end

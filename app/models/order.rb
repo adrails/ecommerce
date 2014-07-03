@@ -9,13 +9,16 @@ class Order < ActiveRecord::Base
   end
 	
 	def self.payment_details(params)
+		p "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+		p params
+		p "###############################"
 		ActiveMerchant::Billing::CreditCard.new(
 		:number     => params[:number],
 		:month      => params[:month],
 		:year       => params[:year],
 		:first_name => params[:first_name],
 		:last_name  => params[:last_name],
-		:verification_value  => params[:verification_value]
+		:verification_value  => params[:cvv]
 		)
   end
 

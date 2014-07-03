@@ -50,8 +50,12 @@
 			</p>
 		</div>
 		<div style="padding-left:1000px;">
-		<%= button_to "Place Order" %>
-				<%end%>
+		<%= form_tag('/orders/place_order_details', :method=>'get', :multipart => true) do %>
+			<input type="hidden" name="cart_id" value="<%= @cart.id%>">
+			<%= submit_tag("Place Order") %>
+		<%end%>
+		<div class="clear"></div>
+		<%end%>
 		</div>
 	</div>
 

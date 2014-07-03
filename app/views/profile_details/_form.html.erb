@@ -1,45 +1,74 @@
- <div class="login">
-          	<div class="wrap">
-				<div class="col_1_of_profile span_1_of_login">
-				<div class="login-title">
-	           		<h4 class="title">Profile Details</h4>
-					<div id="loginbox" class="loginbox">
-					<%= form_for @profile_detail, :html => { :class => 'form-horizontal', :multipart => true  } do |f| %>
-						<!--form action="" method="post" name="login" id="login-form"-->
-						  <fieldset class="input">
-							<p id="login-form-username">
-						      <label for="modlgn_username">Picture</label>
-								<%if @profile_detail.avatar.nil?%>
-									<%= f.file_field :avatar %>
-								<%else%>
-									<%= image_tag @profile_detail.avatar.url(:thumb) %>
-									<%= f.file_field :avatar %>
-								<%end%>
-						     </p>
-						    <p id="login-form-username">
-						      <label for="modlgn_username">Contact Number</label>
-									  <%= f.text_field :contact_no, autofocus: true, :class=>"inputbox" %>
-						      </p>
-							<p id="login-form-password">
-						      <label for="modlgn_passwd">Gender</label>
-								<%= f.text_field :gender, autocomplete: "off", :class=>"inputbox"%></div>
-						    </p>
-						    <p id="login-form-password">
-						      <label for="modlgn_passwd">DOB</label>
-								<%= f.text_field :dob, autocomplete: "off", :class=>"inputbox"%></div>
-						    </p>
-								<%= f.hidden_field :doj, :value => Time.now %>
-						    <div class="remember">
-								<div><%= f.button "Save", :class=>"grey" %></div>
-							 </div>
-						  </fieldset>
-						<% end %>
-					</div>
-			    </div>
-				</div>
-				<div class="clear"></div>
+	<div class="wrap">
+		<div class="col_1_of_login span_1_of_login">
+		<div class="login-title">
+						<h4 class="title">Profile Details</h4>
+			<div id="loginbox" class="loginbox">
+				<%= form_for @profile_detail, :html => { :class => 'form-horizontal', :multipart => true  } do |f| %>
+				<!--form action="" method="post" name="login" id="login-form"-->
+					<fieldset class="input">
+					<p id="login-form-username">
+							<label for="modlgn_username">Picture</label>
+						<%if @profile_detail.avatar.nil?%>
+							<%= f.file_field :avatar %>
+						<%else%>
+							<%= image_tag @profile_detail.avatar.url(:thumb) %>
+							<%= f.file_field :avatar %>
+						<%end%>
+						 </p>
+						<p id="login-form-username">
+							<label for="modlgn_username">Contact Number</label>
+								<%= f.text_field :contact_no, autofocus: true, :class=>"inputbox" %>
+							</p>
+					<p id="login-form-password">
+							<label for="modlgn_passwd">Gender</label>
+						<%= f.text_field :gender, autocomplete: "off", :class=>"inputbox"%></div>
+						</p>
+						<p id="login-form-password">
+							<label for="modlgn_passwd">DOB</label>
+						<%= f.text_field :dob, autocomplete: "off", :class=>"inputbox"%></div>
+						</p>
+						<%= f.hidden_field :doj, :value => Time.now %>
+						<div class="remember">
+						<div><%= f.button "Save", :class=>"grey" %></div>
+					 </div>
+					</fieldset>
+				<% end %>
+			</div>
 			</div>
 		</div>
-
-	
-
+		<div class="col_1_of_login span_1_of_login">
+		<h4 class="title">Address Details</h4>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Address</th>
+						<th>Location</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+				<%if @profile_detail.addresses.present?%>
+				<% @profile_detail.addresses.each do |address| %>
+				<tr>
+					<td><%= address.line_1 %></td>
+						<td><%= address.city %>,
+					<%= address.state %>,
+					<%= address.country %>,<%= address.pincode %>
+					</td>
+				<td> <%= link_to "Edit #{address.nick_name}"	,edit_address_path(address), :class => 'btn btn-mini' %> </td>
+				<td><%= link_to t('.destroy', :default => t("helpers.links.destroy")),address_path(address),:method => :delete,:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },:class => 'btn btn-mini btn-danger' %></td>
+				</tr>
+					<% end %>
+					<% end %>
+				</tbody>
+			</table>
+		
+		<div class="button1" style="float:left;"> 
+	<%if params[:action]=="edit"%>
+		<%=link_to "Add Address", new_address_path,:class=> "btn btn-primary", :style=>"color:white;"%>
+	<% end %>
+		 </div>
+		 <div class="clear"></div>
+	</div>
+	<div class="clear"></div>
+		</div>
