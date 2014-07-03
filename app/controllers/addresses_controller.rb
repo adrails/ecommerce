@@ -57,7 +57,7 @@ class AddressesController < ApplicationController
 		@profile_id = @address.profile_detail_id
     @address.destroy
     respond_to do |format|
-      format.html { redirect_to edit_profile_detail_path(@profile_id) }
+      format.html { redirect_to edit_profile_detail_path(@address.profile_detail_id) }
       format.json { head :no_content }
     end
   end

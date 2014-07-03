@@ -64,8 +64,10 @@ class CartsController < ApplicationController
 
 	def my_cart
 		@cart = Cart.find_by_user_id(params[:user_id])
-		@products_ids = @cart.product_item_ids
+		p @cart
 		@new_product_id = params[:product_item_ids].to_i
+		@products_ids = @cart.product_item_ids
+		
 		if @cart.quantity.nil?
 			@cart.quantity = [{"product_id"=>@new_product_id, "quantity"=>1}]
 		else
@@ -75,7 +77,11 @@ class CartsController < ApplicationController
 		if @cart.total.nil?
 			@cart.total = ProductItem.find(@new_product_id).price
 		else
-			@cart.total = @cart.total+ProductItem.find(@new_product_id).price
+			if ([@new_product_id]-@products_ids).empty?
+				@cart.total = @cart.total
+			else
+				@cart.total = @cart.total+ProductItem.find(@new_product_id).price
+			end
 		end
 		
 		if @products_ids.nil?
@@ -106,6 +112,8 @@ class CartsController < ApplicationController
 		@rejected = @cart.quantity.reject{|h| params[:product_id].to_i == h["product_id"] }
 		@cart.quantity = @rejected
 		if !@cart.total.nil?
+			p @cart.total.to_i
+			p "@@@@@@@@@@@@@@@@@@@@@@"
 			@cart.total = @cart.total-(ProductItem.find(params[:product_id].to_i).price)
 		else
 			@cart.total = nil

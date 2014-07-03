@@ -1,9 +1,10 @@
 	<div class="col_1_of_login span_1_of_login">
 			<div class="button1" style="margin-top:5px;"> 
-		<%=link_to "Add Address", new_address_path,:class=> "btn btn-primary", :style=>"color:white;"%>
+		<%=link_to "Add Address", new_address_path,:class=> "btn btn-primary",:id=>"new_address", :style=>"color:white;"%>
 		 </div>
 
 		<h4 class="title">Delivery Address Details</h4>
+		<%if @profile_detail.addresses.present?%>
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -13,7 +14,6 @@
 					</tr>
 				</thead>
 				<tbody>
-				<%if @profile_detail.addresses.present?%>
 				<% @profile_detail.addresses.each do |address| %>
 				<tr>
 				 <td><%= radio_button_tag 'address_id', address.id %></td>
@@ -25,6 +25,8 @@
 				<!--td><%= link_to t('.destroy', :default => t("helpers.links.destroy")),address_path(address),:method => :delete,:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },:class => 'btn btn-mini btn-danger' %></td-->
 				</tr>
 					<% end %>
+					<%else%>
+					<p> Currently No Addresses are there. Please create it!!
 					<% end %>
 				</tbody>
 			</table>
@@ -37,11 +39,66 @@
 	</div>
 	<div class="clear"></div>
 </div>
+		<div class="col_1_of_login span_1_of_login" id="address_form" style="display:none">
+		<div class="login-title">
+			<h4 class="title">New Address</h4>
+			<div id="loginbox" class="loginbox">
+						<%= form_for @address, :html => { :class => 'form-horizontal' } do |f| %>
+				<!--form action="" method="post" name="login" id="login-form"-->
+					<fieldset class="input">
+					<p id="login-form-password">
+							<label for="modlgn_passwd">Contact Name</label>
+							<%= f.text_field :nick_name, :class => 'text_field' %>
+					</p>
+						<p id="login-form-username">
+							<label for="modlgn_username">Address</label>
+							      <%= f.text_field :line_1, :class => 'text_field' %>
+							      <%= f.text_field :line_2, :class => 'text_field' %>
+							</p>
+
+						<p id="login-form-password">
+							<label for="modlgn_passwd">Country</label>
+						<%= f.text_field :country, :class => 'text_field' %>
+						</p>
+						<p id="login-form-password">
+							<label for="modlgn_passwd">State</label>
+						<%= f.text_field :state, :class => 'text_field' %>
+						</p>
+						<p id="login-form-password">
+							<label for="modlgn_passwd">City</label>
+						<%= f.text_field :city, :class => 'text_field' %>
+						</p>
+						<p id="login-form-password">
+							<label for="modlgn_passwd">Pincode</label>
+						<%= f.text_field :pincode, :class => 'text_field' %>
+						</p>
+						<div class="remember">
+						<div><%= f.button "Save", :class=>"grey" %></div>
+						<div><%= f.button "cancel", :class=>"grey", :id=>"remove_form" %></div>
+					 </div>
+					</fieldset>
+				<% end %>
+			</div>
+			</div>
+		</div>
+	
+	<div class="clear"></div>
+
 		
 <script type="text/javascript">
 $('input:radio[name=address_id]').click(function() {
   var add_val = $('input:radio[name=address_id]:checked').val();
 	$('input[name="address_id_val"]').val(add_val);
+});
+
+
+$( "#new_address" ).click(function() {
+  $("#address_form").toggle(500);
+	return false;
+});
+$( "#remove_form" ).click(function() {
+  $("#address_form").toggle(500);
+	return false;
 });
 
 </script>

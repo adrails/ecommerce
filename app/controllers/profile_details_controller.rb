@@ -23,7 +23,7 @@ class ProfileDetailsController < ApplicationController
   # GET /profile_details/1/edit
   def edit
 		#~ 2.times do
-			#~ address = @profile_detail.addresses.build
+			 @address = Address.new
 		#~ end
   end
 

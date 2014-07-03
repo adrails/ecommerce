@@ -1,7 +1,8 @@
 class Order < ActiveRecord::Base
 	belongs_to :cart
 	attr_accessible :cart_id,:amount_paid,:address_id,:ip,:first_name, :last_name,:credit_card_no,:card_type,:expiry_month,:expiry_year,:cvv
-
+	serialize :product_ids
+	
 	def self.payment_gateway
     #payment gateway configuration has avliablein payment_gateway.yml.
     ActiveMerchant::Billing::Base.mode = Payment_mode.to_sym
@@ -9,9 +10,6 @@ class Order < ActiveRecord::Base
   end
 	
 	def self.payment_details(params)
-		p "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-		p params
-		p "###############################"
 		ActiveMerchant::Billing::CreditCard.new(
 		:number     => params[:number],
 		:month      => params[:month],

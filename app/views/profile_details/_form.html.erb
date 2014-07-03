@@ -21,7 +21,9 @@
 							</p>
 					<p id="login-form-password">
 							<label for="modlgn_passwd">Gender</label>
-						<%= f.text_field :gender, autocomplete: "off", :class=>"inputbox"%></div>
+						<input type="radio" name="gender" value="male">Male</input>
+						<input type="radio" name="gender" value="female">Female</input>
+				
 						</p>
 						<p id="login-form-password">
 							<label for="modlgn_passwd">DOB</label>
@@ -35,12 +37,16 @@
 				<% end %>
 			</div>
 			</div>
+		
 		</div>
+		
 		<div class="col_1_of_login span_1_of_login">
 		<h4 class="title">Address Details</h4>
+		<%if params[:action]=="edit" && @profile_detail.addresses.present?%>
 			<table class="table table-striped">
 				<thead>
 					<tr>
+						<th>Name</th>
 						<th>Address</th>
 						<th>Location</th>
 						<th>Action</th>
@@ -50,6 +56,7 @@
 				<%if @profile_detail.addresses.present?%>
 				<% @profile_detail.addresses.each do |address| %>
 				<tr>
+					<td><%= address.nick_name %></td>
 					<td><%= address.line_1 %></td>
 						<td><%= address.city %>,
 					<%= address.state %>,
@@ -62,13 +69,72 @@
 					<% end %>
 				</tbody>
 			</table>
-		
+			<%else%>
+			<p> No Address!!</p>
+				<% end %>
 		<div class="button1" style="float:left;"> 
-	<%if params[:action]=="edit"%>
-		<%=link_to "Add Address", new_address_path,:class=> "btn btn-primary", :style=>"color:white;"%>
-	<% end %>
+	
+		<%=link_to "Add Address", new_address_path,:class=> "btn btn-primary", :id=>"new_address", :style=>"color:white;"%>
+
 		 </div>
 		 <div class="clear"></div>
 	</div>
-	<div class="clear"></div>
+
+		
+		
+		<div class="col_1_of_login span_1_of_login" id="address_form" style="display:none">
+		<div class="login-title">
+			<h4 class="title">New Address</h4>
+			<div id="loginbox" class="loginbox">
+						<%= form_for @address, :html => { :class => 'form-horizontal' } do |f| %>
+				<!--form action="" method="post" name="login" id="login-form"-->
+					<fieldset class="input">
+					<p id="login-form-password">
+							<label for="modlgn_passwd">Contact Name</label>
+							<%= f.text_field :nick_name, :class => 'text_field' %>
+					</p>
+						<p id="login-form-username">
+							<label for="modlgn_username">Address</label>
+							      <%= f.text_field :line_1, :class => 'text_field' %>
+							      <%= f.text_field :line_2, :class => 'text_field' %>
+							</p>
+
+						<p id="login-form-password">
+							<label for="modlgn_passwd">Country</label>
+						<%= f.text_field :country, :class => 'text_field' %>
+						</p>
+						<p id="login-form-password">
+							<label for="modlgn_passwd">State</label>
+						<%= f.text_field :state, :class => 'text_field' %>
+						</p>
+						<p id="login-form-password">
+							<label for="modlgn_passwd">City</label>
+						<%= f.text_field :city, :class => 'text_field' %>
+						</p>
+						<p id="login-form-password">
+							<label for="modlgn_passwd">Pincode</label>
+						<%= f.text_field :pincode, :class => 'text_field' %>
+						</p>
+						<div class="remember">
+						<div><%= f.button "Save", :class=>"grey" %></div>
+						<div><%= f.button "cancel", :class=>"grey", :id=>"remove_form" %></div>
+					 </div>
+					</fieldset>
+				<% end %>
+			</div>
+			</div>
 		</div>
+	
+<div class="clear"></div>
+		</div>
+		
+<script type="text/javascript">
+$( "#new_address" ).click(function() {
+  $("#address_form").toggle(500);
+	return false;
+});
+$( "#remove_form" ).click(function() {
+  $("#address_form").toggle(500);
+	return false;
+});
+</script>

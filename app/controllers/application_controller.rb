@@ -31,8 +31,10 @@ class ApplicationController < ActionController::Base
 	
 	# Here checked user session
   def check_login
-		flash[:notice] = "Need to Login"
-    redirect_to root_path 
+		if !current_user
+			flash[:notice] = "Need to Login"
+			redirect_to root_path 
+		end
   end
 	
 end
