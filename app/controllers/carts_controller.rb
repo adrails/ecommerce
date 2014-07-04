@@ -112,14 +112,16 @@ class CartsController < ApplicationController
 		@rejected = @cart.quantity.reject{|h| params[:product_id].to_i == h["product_id"] }
 		@cart.quantity = @rejected
 		if !@cart.total.nil?
-			p @cart.total.to_i
-			p "@@@@@@@@@@@@@@@@@@@@@@"
 			@cart.total = @cart.total-(ProductItem.find(params[:product_id].to_i).price)
 		else
 			@cart.total = nil
 		end
 		respond_to do |format|
       if @cart.save
+				if @cart.product_item_ids.empty?
+					@cart.total =nil
+					@cart.save
+				end
         format.html { redirect_to carts_path, notice: 'Cart was successfully updated.' }
         format.json { head :no_content }
       else

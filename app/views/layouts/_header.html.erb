@@ -143,13 +143,14 @@
 					<li><a href="/carts"><h3>No products</h3></a></li>
 					<%else%>
 						<% current_user.cart.product_item_ids && current_user.cart.product_item_ids.each do |product_item| %>
-						<% product_item = find_product_item(product_item)%>
+							<% product_item = find_product_item(product_item)%>
 							<li><a href="/carts"><h3><%=product_item.title%></h3></a></li>
 							<li><p><%=product_item.price%><a href="">adipiscing elit, sed diam</a></p></li>
+							<%end%>
 						</ul>
 					</li>
 					</ul>
-				<%end%>
+	
 				<%end%>
 					<%if current_user.cart.product_item_ids.nil?%>
 						<ul class="last"><li><%= link_to "My Cart (0)", carts_path %> </li></ul>
