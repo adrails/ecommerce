@@ -13,6 +13,7 @@ class Devise::RegistrationsController < DeviseController
 		if !params[:retailer]
 			build_resource(sign_up_params)
 			if resource.save
+				ProfileDetail.create(:user_id=>resource.id)
 				yield resource if block_given?
 				if resource.active_for_authentication?
 					set_flash_message :notice, :signed_up if is_flashing_format?

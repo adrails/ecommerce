@@ -24,9 +24,9 @@ class OrdersController < ApplicationController
 			@cart.save
 			@order.product_ids.each do |p|
 				@product = ProductItem.find_by_id(p)
+				Notifier.product_owner_details(@product).deliver
 			end
-			
-			Notifier.order_details_notification(current_user,@product).deliver
+			Notifier.order_details_notification(current_user,@order).deliver
       if response.success?
         @res = response.params
 				flash[:notice] = "payment sucessfull"
@@ -45,6 +45,10 @@ class OrdersController < ApplicationController
 		@address = Address.new
 		@profile_detail = ProfileDetail.find_by_user_id(current_user.id)
 		@cart_id = params[:cart_id]
+	end
+	
+	def approve_order
+		@order=Order.all
 	end
 	
 end

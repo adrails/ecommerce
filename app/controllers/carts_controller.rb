@@ -64,10 +64,10 @@ class CartsController < ApplicationController
 
 	def my_cart
 		@cart = Cart.find_by_user_id(params[:user_id])
-		p @cart
+
 		@new_product_id = params[:product_item_ids].to_i
 		@products_ids = @cart.product_item_ids
-		
+	
 		if @cart.quantity.nil?
 			@cart.quantity = [{"product_id"=>@new_product_id, "quantity"=>1}]
 		else
@@ -77,7 +77,7 @@ class CartsController < ApplicationController
 		if @cart.total.nil?
 			@cart.total = ProductItem.find(@new_product_id).price
 		else
-			if ([@new_product_id]-@products_ids).empty?
+			if ([@new_product_id]-@products_ids).empty? || @products_ids.nil?
 				@cart.total = @cart.total
 			else
 				@cart.total = @cart.total+ProductItem.find(@new_product_id).price
@@ -92,8 +92,13 @@ class CartsController < ApplicationController
 		
 		respond_to do |format|
       if @cart.save
-				if ([@new_product_id]-@products_ids).empty?
-					flash[:notice] = "Already present in your Cart!!"
+				p "Save condn"
+				p @new_product_id
+				p @products_ids
+				if !@products_ids.nil?
+					if ([@new_product_id]-@products_ids).empty? 
+						flash[:notice] = "Already present in your Cart!!"
+					end
 				else
 					flash[:notice] = "Cart was successfully updated."
 				end

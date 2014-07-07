@@ -50,6 +50,8 @@ ECommerce::Application.routes.draw do
   get 'orders/billing_info' => 'orders#billing_info'
   get 'orders/place_order_details' => 'orders#place_order_details'
   post 'orders/checkout' => 'orders#checkout'
+  get 'orders/approve_order' => 'orders#approve_order'
+	
 	#~ resources :orders do
 		#~ collection do
 			#~ post 'checkout'

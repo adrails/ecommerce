@@ -30,11 +30,12 @@
 					<% end %>
 				</tbody>
 			</table>
-			
+			<%if @profile_detail.addresses.present?%>
 		<%= form_tag(orders_billing_info_path, :method=>'get') do %>
 			<input type="hidden" name="cart_id" value="<%=@cart_id%>">
 			<input type="hidden" name="address_id_val" value="">
 			<%= submit_tag("Choose Address", :class=>"btn btn-primary") %>
+		<%end%>
 		<%end%>
 	</div>
 	<div class="clear"></div>

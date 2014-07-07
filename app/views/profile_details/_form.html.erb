@@ -39,10 +39,10 @@
 			</div>
 		
 		</div>
-		
+		<%if params[:action]=="edit" && @profile_detail.addresses.present?%>
 		<div class="col_1_of_login span_1_of_login">
 		<h4 class="title">Address Details</h4>
-		<%if params[:action]=="edit" && @profile_detail.addresses.present?%>
+		
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -66,22 +66,21 @@
 				<td><%= link_to t('.destroy', :default => t("helpers.links.destroy")),address_path(address),:method => :delete,:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },:class => 'btn btn-mini btn-danger' %></td>
 				</tr>
 					<% end %>
-					<% end %>
+					
 				</tbody>
 			</table>
 			<%else%>
 			<p> No Address!!</p>
 				<% end %>
 		<div class="button1" style="float:left;"> 
-	
-		<%=link_to "Add Address", new_address_path,:class=> "btn btn-primary", :id=>"new_address", :style=>"color:white;"%>
-
+			<%=link_to "Add Address", new_address_path,:class=> "btn btn-primary", :id=>"new_address", :style=>"color:white;"%>
 		 </div>
+		 <% end %>
 		 <div class="clear"></div>
 	</div>
 
 		
-		
+		<%if params[:action]=="edit" %>
 		<div class="col_1_of_login span_1_of_login" id="address_form" style="display:none">
 		<div class="login-title">
 			<h4 class="title">New Address</h4>
@@ -125,6 +124,7 @@
 			</div>
 		</div>
 	
+	<%end%>
 <div class="clear"></div>
 		</div>
 		

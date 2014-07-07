@@ -20,7 +20,7 @@ class HomeController < ApplicationController
 	end
 	
 	def index
-		@product_items = ProductItem.all
+		@product_items = ProductItem.find_all_by_is_active(true)
 	end
 	
 end

@@ -2,7 +2,7 @@
 	<div class="wrap"> 
 		<div class="header-top-left">
 			<% if user_signed_in? %>
-			<P> Logged in as :<%=current_user.role_type%> | <%=current_user.name%> </p>
+			<p> Logged in as :<%=current_user.role_type%> | <%=current_user.name%> </p>
 			<% end %>
 			<!--div class="box">
 			<select tabindex="4" class="dropdown">
@@ -40,12 +40,12 @@
 					<%end%>
 					<% if User.find_role?(current_user) == "A"%>
 						<li><%= link_to "Users", users_path %> </li> |
-						<li><%= link_to "Retailers", retailer_requests_admins_path %> 
+						<!--li><!--%= link_to "Retailers", retailer_requests_admins_path %--> 
 							<!--ul>
 								<li><a href="/admins/retailer_requests">User  Request</a></li>
 								<li><a href="/admins/product_approval">Product Approval</a></li>
 							</ul-->
-						</li> |
+						</li> 
 						<li><%= link_to "Products", product_items_path %> 
 							<!--ul>
 								<li><a href="/product_categories">Categories</a></li>
@@ -82,7 +82,7 @@
 		<% if current_user && User.find_role?(current_user) == "B"%>
 			<%if params[:controller] == "product_items" && params[:action] == "index"%>
 				<li><%= link_to "Products", product_items_path, :class => "color4" %> 
-				<li><a class="color6" href="other.html">Approve</a></li>
+				<li><a class="color6" href="/orders/approve_order">Approve Order</a></li>
 				<li><a class="color6" href="other.html">History</a></li>
 			<% end %>
 		<%end%>
@@ -91,14 +91,15 @@
 				<li><a class="color6" href="other.html">History</a></li>
 		<%end%>
 		<% if current_user && User.find_role?(current_user) == "A"%>
+		<li><a class="color6" href="/orders/approve_order">Approve Order</a></li>
 			<li><a class="color5" href="#">Retailer</a>
 			<div class="megapanel">
 				<div class="col1">
 						<div class="h_nav">
-							<h4>User Request</h4>
+							<h4>Retailer Request</h4>
 							<ul>
-								<li><a href="mens.html">Daily-wear soft lenses</a></li>
-								<li><a href="mens.html">Extended-wear</a></li>
+								<li><a href="/admins/retailer_requests">User  Request</a></li>
+								<li><a href="/admins/product_approval">Product Approval</a></li>
 							</ul>	
 						</div>							
 					</div>

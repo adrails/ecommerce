@@ -26,11 +26,17 @@ class Notifier < ActionMailer::Base
 		mail(to: @product.user.email, subject: 'Sorry Your Product is rejected')
 	end
 		
-	def order_details_notification(user,product)
-		@order_owner_email = user.email
-		@product = ProductITem
-		@product_owner_email = user.email
+	def order_details_notification(user,order)
+		@user = user
+		@order = order.product_ids
+		@order_owner_email = @user.email
+		mail(to: @order_owner_email, subject: 'Your Order successfully purchased')
+	end
+	
+	def product_owner_details(product)
 		@product = product
-		mail(to: @product.user.email, subject: 'Sorry Your Product is rejected')
+		@product_user_id = product.user_id
+		@product_owner_email = User.find_by_id(@product_user_id)
+		mail(to: @product_owner_email.email, subject: 'Your Order purchased by user')
 	end
 end
