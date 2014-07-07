@@ -1,0 +1,14 @@
+<p>Dear Admin,</p>
+
+<p><b>You have a new Product Request</b></p>
+<p><b>Customer Name: </b><%= @user.name%></p>
+<%@order.each do |order|%>
+	<% @product = ProductItem.find_by_id(order) %>
+	<p><b>Product Details</b></p>
+	<p><b>Product Title: </b><%=@product.title%></p>
+	<p><b>Product Description: </b><%=@product.description%></p>
+	<p><b>Product Price: </b><%=@product.price%></p>
+<%end%>
+
+<p>Regards,</p>
+<p>Smartek Ecommerce Team</p>
