@@ -57,20 +57,66 @@ body{
 	width:20.5%;
 }
 .cssmenu{
-	float:right;
-	color:#96e8fc;
-	font-size: 0.8125em;
+ float:right;
+color:#96e8fc;
+ font-size: 0.8125em;
 }
+
 .cssmenu ul li {
-	display: inline-block;
+ display: inline-block;
 }
+
 .cssmenu ul li a {
-	color:#fff;
-	display: block;
-	margin:10px;
+ color:#fff;
+ display: block;
+ margin:10px;
 }
-.cssmenu li> a:hover {
-	color: #ACEAFA;
+
+.cssmenu ul li a:hover{
+ color: #ACEAFA;
+}
+
+.cssmenu ul li ul
+{
+display: none;
+position:absolute;
+top:40px;
+padding:0px;
+margin:0px;
+}
+
+.cssmenu ul li:hover ul
+{
+display: block;
+position: absolute;
+margin: 0;
+padding: 0;
+}
+
+.cssmenu ul li:hover li
+{
+float: none;
+list-style:none;
+margin:0px;
+}
+
+.cssmenu ul li:hover li
+{
+background-color: #96E8FC; 
+border-top:1px solid #000000;
+}
+
+.cssmenu ul li:hover li a
+{
+color: #fff;
+padding:0 15px;
+display:block;
+width:100px;
+}
+
+.cssmenu ul li li a:hover
+{
+color:#000;
 }
 .header-bottom{
 	background:#fff;

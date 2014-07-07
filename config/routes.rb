@@ -51,13 +51,13 @@ ECommerce::Application.routes.draw do
   get 'orders/place_order_details' => 'orders#place_order_details'
   post 'orders/checkout' => 'orders#checkout'
   get 'orders/approve_order' => 'orders#approve_order'
+  #post 'orders/approve_and_reject_retailer_product' => 'orders#approve_and_reject_retailer_product'
 	
-	#~ resources :orders do
-		#~ collection do
-			#~ post 'checkout'
-			#~ post 'place_order_details'
-		#~ end
-	#~ end
+	resources :orders do
+		member do
+			post 'approve_and_reject_retailer_product'
+		end
+	end
   get 'home/search' => 'home#search'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

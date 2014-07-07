@@ -39,4 +39,11 @@ class Notifier < ActionMailer::Base
 		@product_owner_email = User.find_by_id(@product_user_id)
 		mail(to: @product_owner_email.email, subject: 'Your Order purchased by user')
 	end
+	
+	def approve_product_by_retailer(email,product)
+		@email = email
+		@product = product
+		mail(to: @email, subject: 'Product approved by Retailer')
+	end
+	
 end

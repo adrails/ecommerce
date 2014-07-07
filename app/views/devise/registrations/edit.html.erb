@@ -1,5 +1,11 @@
-<h2>Change Password</h2>
-
+<div class="wrap">
+		<div class="col_1_of_login span_1_of_login">
+		
+					<h4 class="title">Change Password</h4>
+		<div id="loginbox" class="loginbox">
+		
+  <!--form action="" method="post" name="login" id="login-form"-->
+	<fieldset class="input">
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 	
@@ -21,12 +27,14 @@
 
   <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "off" %></div>
-
-  <div><%= f.submit "Update" %></div>
+	<div class="remember">
+  <div><%= f.button "Update", :class=>"grey" %></div>
+	
+</div>
+	</fieldset>	
 <% end %>
+</div>
+</div>
+<div class="clear"></div>
+</div>
 
-<!--h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>-->

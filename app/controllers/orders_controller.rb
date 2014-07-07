@@ -51,4 +51,22 @@ class OrdersController < ApplicationController
 		@order=Order.all
 	end
 	
+	def approve_and_reject_retailer_product
+		@order = Order.find(params[:id])
+		if params[:approval] = "Yes"
+			@order.retailer_approve = true
+			@order.save
+			@email = User.first.email
+			@order.product_ids.each do |p|
+				@product = ProductItem.find_by_id(p)
+				Notifier.approve_product_by_retailer(@email,@product).deliver
+			end
+			flash[:notice] = "Product Approved Successfully!!"
+		elsif params[:approval] = "No"
+			flash[:notice] = "Product Rejected Successfully!!"
+		end
+		redirect_to retailer_requests_admins_path
+	end
+	
+	
 end
