@@ -74,6 +74,7 @@ color:#96e8fc;
 
 .cssmenu ul li a:hover{
  color: #ACEAFA;
+ z-index:10000;
 }
 
 .cssmenu ul li ul
@@ -91,6 +92,7 @@ display: block;
 position: absolute;
 margin: 0;
 padding: 0;
+z-index:10000;
 }
 
 .cssmenu ul li:hover li
@@ -98,12 +100,14 @@ padding: 0;
 float: none;
 list-style:none;
 margin:0px;
+z-index:10000;
 }
 
 .cssmenu ul li:hover li
 {
 background-color: #96E8FC; 
 border-top:1px solid #000000;
+z-index:10000;
 }
 
 .cssmenu ul li:hover li a
@@ -112,11 +116,13 @@ color: #fff;
 padding:0 15px;
 display:block;
 width:100px;
+z-index:10000;
 }
 
 .cssmenu ul li li a:hover
 {
 color:#000;
+z-index:10000;
 }
 .header-bottom{
 	background:#fff;
@@ -187,7 +193,7 @@ color:#000;
 	font-family: 'Exo 2', sans-serif;
 	color:#777;
 	width:130px;
-	padding:7px;
+	padding:2px;
 	-webkit-apperance:none;
 	margin:0;
 	-webkit-transition: all 0.5s ease-out;
@@ -1105,7 +1111,7 @@ table {
 .register_account form input[type="text"], .register_account form select {
 	font-size:0.95em;
 	color:#777;
-	padding: 8px;
+	padding: 5px;
 	outline: none;
 	margin:10px 0;
 	width:100%;

@@ -44,12 +44,15 @@
 						
 					<%end%>
 					<%if User.find_role?(current_user) == "A"%>
-							 <li><a href="#">Retailer</a> 
+					<% @user = User.find_all_by_role_type_and_retailer_approval("RETAILER",false).count %>
+						<li><a href="#">Retailer</a> 
 							 <ul>
-								<li><a href="/admins/retailer_requests">User  Request</a>
-									<a href="/admins/product_approval">Product Approval</a></li>		 
+								<li>
+									<a href="/admins/retailer_requests"><%= @user ? "User  Request(#{@user})": "User  Request"%></a>
+									<a href="/admins/product_approval">Product Approval</a>
+								</li>		 
 							 </ul> 
-					 </li> |
+						</li> |
 
 					<% elsif User.find_role?(current_user) == "B"%>	
 						<li><%= link_to "Manage Products", product_items_path %> </li> |

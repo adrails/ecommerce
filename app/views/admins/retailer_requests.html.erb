@@ -1,6 +1,7 @@
 <%- model_class = User -%>
+<div class="wrap">
 <div class="page-header">
-  <h1>Retailer Requests</h1>
+  <h2>Retailer Requests</h2>
 </div>
 <% if !@users.present? %>
 	Sorry!! No Requests Found
@@ -38,5 +39,8 @@
 	</table>
 	<!--%= link_to t('.new', :default => t("helpers.links.new")),new_user_path,:class => 'btn btn-primary' %-->
 <% end %>
+</div>
+<div class="clear">
+</div>
 
 

@@ -33,6 +33,7 @@ ECommerce::Application.routes.draw do
 			get 'assign'
 			get 'assign_item'
 			get 'product_approval'
+			get 'get_role_type'
 		end
 		member do
 			post 'approve_and_reject_retailer'
