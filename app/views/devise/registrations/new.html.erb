@@ -8,11 +8,11 @@
 			<div class="col_1_of_2 span_1_of_2">
 				<div>
 					<label for="modlgn_username">Name</label>
-					<input type="text" name="user[name]" placeholder="Name">
+					<input type="text" name="user[name]" placeholder="Name" class="inputbox" >
 				</div>
 				<div>
 					<label for="modlgn_username">Email</label>
-					<input type="text" name="user[email]" placeholder="Email">
+					<input type="text" name="user[email]" placeholder="Email" class="inputbox">
 				</div>
 				<%if params[:retailer]%>
 					<%= f.hidden_field :role_type, value: "RETAILER" %>
@@ -42,7 +42,7 @@
 					</div>	
 					<div>
 						<label for="modlgn_username">Password Confirmation</label>
-						<input type="text" name="user[password_confirmation]" placeholder="Password Confirmation">
+						<input type="password" name="user[password_confirmation]" class="inputbox" size="18" placeholder="Password Confirmation">
 					</div>
 					<div>
 				<% end %>
