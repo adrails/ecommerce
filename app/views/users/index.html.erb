@@ -18,7 +18,7 @@
 				<th><%= model_class.human_attribute_name(:id) %></th>
 				<th><%= model_class.human_attribute_name(:name) %></th>
 				<th><%= model_class.human_attribute_name(:email) %></th>
-				<th><%= model_class.human_attribute_name(:role_type) %></th>
+				<th>Role</th>
 				<th>Description</th>
 				<th><%=t '.actions', :default => t("helpers.actions") %></th>
 			</tr>
@@ -29,7 +29,7 @@
 					<td><%= link_to user.id, user_path(user) %></td>
 					<td><%= user.name %></td>
 					<td><%= user.email %></td>
-					<td><%= user.role_type %></td>
+					<td><%= user.role.role_type %></td>
 					<td><%= user.desc %></td>
 					<td>
 				<%= link_to t('.destroy', :default => t("helpers.links.destroy")),user_path(user),:method => :delete,:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },:class => 'btn btn-mini btn-danger' %>

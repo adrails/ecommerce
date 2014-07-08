@@ -16,9 +16,9 @@ class ApplicationController < ActionController::Base
 	end
 	 
 	def after_sign_in_path_for(user)
-		if user.role_type == "ADMIN"
-		 admins_path
-		elsif user.role_type == "RETAILER"
+		if user.role_id == 1
+		 product_items_path
+		elsif user.role_id == 2
 		 product_items_path
 		else 
 		 root_path
@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
 	end
 
 	def update_sanitized_params
-		devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:name, :role_type,:email,:password)}
+		devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:name, :role_id,:email,:password)}
 	end
 	
 	# Here checked user session

@@ -62,7 +62,7 @@ class AdminsController < ApplicationController
   end
 	
 	def retailer_requests
-		@users = User.find_all_by_role_type_and_retailer_approval("RETAILER",false)
+		@users = User.find_all_by_role_id_and_retailer_approval(2,false)
 	end
 
 	def approve_and_reject_retailer
@@ -123,10 +123,7 @@ class AdminsController < ApplicationController
 	end
 	
 	def get_role_type
-		p params
-		p "##############"
-		@users = User.find_all_by_role_type(params[:role])
-		p @users.count
+		@users = User.find_all_by_role_id(Role.find_by_role_type(params[:role]))
 	end
 	
   private

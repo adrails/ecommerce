@@ -2,23 +2,8 @@
 	<div class="wrap"> 
 		<div class="header-top-left">
 			<% if user_signed_in? %>
-			<p> Logged in as :<%=current_user.role_type%> | <%=current_user.name%> </p>
+			<p> Logged in as :<%=current_user.role.role_type%> | <%=current_user.name%> </p>
 			<% end %>
-			<!--div class="box">
-			<select tabindex="4" class="dropdown">
-			<option value="" class="label" value="">Language :</option>
-			<option value="1">English</option>
-			<option value="2">French</option>
-			<option value="3">German</option>
-			</select>
-			</div>
-			<div class="box1">
-			<select tabindex="4" class="dropdown">
-			<option value="" class="label" value="">Currency :</option>
-			<option value="1">$ Dollar</option>
-			<option value="2">EUR Euro</option>
-			</select>
-			</div-->
 			<div class="clear"></div>
 		</div>
 	<div class="cssmenu">
@@ -28,7 +13,7 @@
 						<% @profile_id = ProfileDetail.find_by_user_id(current_user.id) %>
 						 <li><a class="color5" href="#">Account Settings</a> 
 							<ul>
-								<li id='sub'><%= link_to "Profile", new_profile_detail_path%>
+								<li id='sub'><%= link_to "Profile", edit_profile_detail_path(@profile_id)%>
 								<%= link_to 'Change password', edit_user_registration_path, :class => 'navbar-link' %></li>
 							</ul> 
 						</li> |
@@ -44,7 +29,7 @@
 						
 					<%end%>
 					<%if User.find_role?(current_user) == "A"%>
-					<% @user = User.find_all_by_role_type_and_retailer_approval("RETAILER",false).count %>
+					<% @user = User.find_all_by_role_id_and_retailer_approval(2,false).count %>
 						<li><a href="#">Retailer</a> 
 							 <ul>
 								<li>
@@ -71,56 +56,63 @@
 	</div>
 </div>
 <div class="header-bottom">
-		<div class="wrap">
+	<div class="wrap">
 		<div class="header-bottom-left">
 			<div class="logo">
 					<a href="/home/index"><img src="/assets/leoshop-images/logo.png" alt=""/></a>
 			</div>
-			<div class="menu">
-						<ul class="megamenu skyblue">
-		<li class="active grid"><a href="/home/index">Home</a></li>
-		<% if !user_signed_in? %>
-		<li><%= link_to "Seller Signup",new_user_registration_path(:retailer=>"Retailer"), :class=>"grey"%></li>
-		<%end%>
-		<% if current_user && User.find_role?(current_user) == "B"%>
-			<%if params[:controller] == "product_items" && params[:action] == "index"%>
-				<li><%= link_to "Products", product_items_path, :class => "color4" %> 
-				
-				<li><a class="color6" href="/orders/approve_order">Approve Order</a></li>
-				<li><a class="color6" href="other.html">History</a></li>
-			<% end %>
-		<%end%>
-		<% if current_user && User.find_role?(current_user) == "C"%>
-				<li><%= link_to "Products", product_items_path, :class => "color4" %> 
-				<li><a class="color6" href="other.html">History</a></li>
-		<%end%>
-		<% if current_user && User.find_role?(current_user) == "A"%>
-		<li><a class="color6" href="/orders/approve_order">Approve Order</a></li>
-			<li><%= link_to "Users", users_path, :class=>"color6"%></li>
-				<li><%= link_to "Products", product_items_path %> </li> 
-		<%end%>
-		</ul>
-		</div>
-	</div>
-	 <div class="header-bottom-right">
-	 <div class="search">
-		
-	 <% if current_user && User.find_role?(current_user) == "B"%>
-	 <form action="/home/search">	
-		<input type="text" class="textbox" name="key" placeholder="search here">
-		<input type="hidden" name="cont" value="<%=params[:controller]%>">
-			 <input type="submit" id="submit">
-	 </form>
-	<% else %>
-	 <form action="/home/search">	
-		<input type="text" class="textbox" name="key" placeholder="search here">
-			 <input type="submit" id="submit">
-	 </form>
-	 <% end %>
+			<div class="cssmegamenu">
+				<ul class="megamenu">
+					<li class="active grid"><a href="/home/index">Home</a></li>
 
-	</div>
-	<div class="tag-list">
+					<% if !user_signed_in? %>
+						<li class="active grid"><%= link_to "Seller Signup",new_user_registration_path(:retailer=>"Retailer"), :class=>"grey"%></li>
+					<%end%>
+					<% if current_user && User.find_role?(current_user) == "B"%>
+						<%if params[:controller] == "product_items" && params[:action] == "index"%>
+							<li class="active grid"><%= link_to "Products", product_items_path, :class => "color4" %> 
+							<li class="active grid"><a class="color6" href="/orders/approve_order">Approve Order</a></li>
+							<li class="active grid"><a class="color6" href="other.html">History</a></li>
+						<% end %>
+					<%end%>
+					<% if current_user && User.find_role?(current_user) == "C"%>
+						<li class="active grid"><%= link_to "Products", product_items_path, :class => "color4" %> 
+						<li class="active grid"><a class="color6" href="other.html">History</a></li>
+					<%end%>
+					<% if current_user && User.find_role?(current_user) == "A"%>
+						<li class="active grid"><a class="color6" href="/orders/approve_order">Approve Order</a></li>
+						<li class="active grid"><%= link_to "Users", users_path, :class=>"color6"%></li>
+						<!--li class="active grid"><%= link_to "Products", product_items_path %> </li!--> 
+						<li class="active grid"><%= link_to "Products", product_items_path%>
+							<ul>
+								<li id='sub'>
+									<%= link_to "Category", product_categories_path%>
+									<%= link_to "Brand", product_brands_path%> 
+									<%= link_to "tes", assign_admins_path%> 
+								</li> 
+							</ul>
+						</li> 
+					<%end%>
+				</ul>
+			</div>
+		</div>
 		
+	 <div class="header-bottom-right">
+		 <div class="search">
+		 <% if current_user && User.find_role?(current_user) == "B"%>
+		 <form action="/home/search">	
+			<input type="text" class="textbox" name="key" placeholder="search here">
+			<input type="hidden" name="cont" value="<%=params[:controller]%>">
+				 <input type="submit" id="submit">
+		 </form>
+		<% else %>
+		 <form action="/home/search">	
+			<input type="text" class="textbox" name="key" placeholder="search here">
+				 <input type="submit" id="submit">
+		 </form>
+		 <% end %>
+		</div>
+	<div class="tag-list">
 		<ul class="icon1 sub-icon1 profile_img">
 		<li><a class="active-icon c1" href="#"> </a>
 			<ul class="sub-icon1 list">

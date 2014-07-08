@@ -3206,3 +3206,68 @@ ul.delivery-list li a:hover{
 		font-size: 1.4em;
 	}
 }
+.cssmegamenu{margin-bottom:0px;padding:0;width:100%;list-style:none;display:inline-block;position:relative;font-size:15px}
+.cssmegamenu li{margin-bottom:0px;display:inline}
+.cssmegamenu>li.active>a{color:#00405d;}
+.cssmegamenu ul li {
+ display: inline-block;
+}
+
+.cssmegamenu ul li a {
+ color:#fff;
+ display: block;
+ margin:10px;
+}
+
+.cssmegamenu ul li a:hover{
+ color: #ACEAFA;
+ z-index:10000;
+}
+
+.cssmegamenu ul li ul
+{
+display: none;
+position:absolute;
+top:50px;
+padding:0px;
+margin:0px;
+}
+
+.cssmegamenu ul li:hover ul
+{
+display: block;
+position: absolute;
+margin: 0;
+padding: 0;
+z-index:10000;
+}
+
+.cssmegamenu ul li:hover li
+{
+float: none;
+list-style:none;
+margin:0px;
+z-index:10000;
+}
+
+.cssmegamenu ul li:hover li
+{
+background-color: #96E8FC; 
+border-top:1px solid #000000;
+z-index:10000;
+}
+
+.cssmegamenu ul li:hover li a
+{
+color: #fff;
+padding:0 15px;
+display:block;
+width:100px;
+z-index:10000;
+}
+
+.cssmegamenu ul li li a:hover
+{
+color:#000;
+z-index:10000;
+}

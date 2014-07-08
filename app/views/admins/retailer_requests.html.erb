@@ -12,7 +12,7 @@
 				<th><%= model_class.human_attribute_name(:id) %></th>
 				<th><%= model_class.human_attribute_name(:name) %></th>
 				<th><%= model_class.human_attribute_name(:email) %></th>
-				<th><%= model_class.human_attribute_name(:role_type) %></th>
+				<th>Role</th>
 				<th>Description</th>
 				<th>Confirmed</th>
 				<th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -24,7 +24,7 @@
 					<td><%= link_to user.id, user_path(user) %></td>
 					<td><%= user.name %></td>
 					<td><%= user.email %></td>
-					<td><%= user.role_type %></td>
+					<td><%= user.role.role_type %></td>
 					<td><%= user.desc %></td>
 					<td><%= user.confirmed_at %></td>
 					<td>

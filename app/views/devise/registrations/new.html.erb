@@ -15,7 +15,7 @@
 					<input type="text" name="user[email]" placeholder="Email" class="inputbox">
 				</div>
 				<%if params[:retailer]%>
-					<%= f.hidden_field :role_type, value: "RETAILER" %>
+					<%= f.hidden_field :role_id, value:2 %>
 					<%= f.hidden_field :retailer_approval, value: false %>
 					<div>
 						<label for="modlgn_username">Description</label>
@@ -35,7 +35,7 @@
 					<%=f.hidden_field :password, :value=>@password%>
 					<%=f.hidden_field :password_confirmation, :value=>@password%>
 				<% else %>
-					<%= f.hidden_field :role_type, :value=>"CUSTOMER" %>	
+					<%= f.hidden_field :role_id, :value=>3 %>	
 					<div>
 						<label for="modlgn_username">Password</label>
 						<input id="modlgn_passwd" type="password" name="user[password]" class="inputbox" size="18" autocomplete="off" placeholder="Password">
